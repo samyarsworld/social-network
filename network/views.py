@@ -29,6 +29,7 @@ def index(request):
         'liked_posts': postsYouLiked
     })
 
+
 @login_required
 @csrf_exempt
 def like(request, post_id):
@@ -39,6 +40,7 @@ def like(request, post_id):
         post.save()
         newLike.save()
         return JsonResponse({"message": "Like successful"})
+
 
 @login_required
 @csrf_exempt
@@ -60,6 +62,7 @@ def edit(request, post_id):
         post.content = data['content']
         post.save()
         return JsonResponse({"message": "Change successful", "data": data["content"]})
+
 
 @login_required
 def following(request):
@@ -113,6 +116,7 @@ def profile(request, user_id):
         'followers': followers,
         'isFollowing': isFollowing
     })
+
 
 @login_required
 def follow(request):

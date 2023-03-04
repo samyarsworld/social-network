@@ -1,0 +1,37 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: white;
+}
+
+.header__left {
+    display: flex;
+    align-items: center;
+}
+
+.header__logo {
+    height: 25px;
+    margin-left: 15px;
+}
+
+.header__middle {
+    display: flex;
+    align-items: center;
+    width: 30%;
+}
+
+
+.header__right {
+    display: flex;
+    align-items: center;
+}
+
+.header__icons {
+    margin-right: 10px;
+}
+

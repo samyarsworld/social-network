@@ -1,0 +1,107 @@
+.feed {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding: 50px 0;
+}
+
+.post {
+  -ms-flex-preferred-size: calc(33.33333% - 30px);
+  flex-basis: calc(33.33333% - 30px);
+  margin: 0 15px 30px;
+  overflow: hidden;
+  border-radius: 28px;
+}
+
+.post__link {
+  display: block;
+  padding: 30px 20px;
+  background-color: #121212;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none;
+}
+
+.post__color {
+  height: 128px;
+  width: 128px;
+  position: absolute;
+  z-index: 1;
+  top: -75px;
+  right: -75px;
+  border-radius: 50%;
+  -webkit-transition: all .5s ease;
+  -o-transition: all .5s ease;
+  transition: all .5s ease;
+}
+
+
+.post__link:hover .post__color {
+  -webkit-transform: scale(10);
+  -ms-transform: scale(10);
+  transform: scale(10);
+}
+.post__title {
+  max-height: 200px;
+  margin: 0 0 25px;
+  overflow: hidden;
+  font-weight: bold;
+  font-size: 14px;
+  color: #FFF;
+  z-index: 2;
+  position: relative;
+}
+.post__publish {
+  font-size: 12px;
+  color: #FFF;
+  z-index: 2;
+  position: relative;
+  display: flex;
+  flex-direction: column;  
+
+}
+
+
+
+.post__color.Java { background-color: #f9b234;}
+.post__color.Javascript { background-color: #e44002;}
+.post__color.Python { background-color: #3ecd5e;}
+.post__color.SQL { background-color: #952aff;}
+.post__color.C { background-color: #cd3e94;}
+.post__color.Ruby { background-color: #4c49ea;}
+.post__color.HTML { background-color: #d6591a;}
+
+.Java {color: #f9b234;}
+.Javascript {color: #e44002;}
+.Python {color: #3ecd5e;}
+.SQL {color: #952aff;}
+.C {color: #cd3e94;}
+.Ruby {color: #4c49ea;}
+.HTML {color: #d6591a;}
+
+
+
+
+@media only screen and (max-width: 979px) {
+  .post {
+    -ms-flex-preferred-size: calc(50% - 30px);
+    flex-basis: calc(50% - 30px);
+  }
+}
+
+
+@media only screen and (max-width: 639px) {
+  .post {
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+  }
+  .post__title {
+    min-height: 72px;
+    line-height: 1;
+  }
+}

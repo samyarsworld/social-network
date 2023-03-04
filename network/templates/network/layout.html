@@ -3,62 +3,176 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Social Network{% endblock %}</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link href="{% static 'network/main-css/node_modules/@fortawesome/fontawesome-free/css/fontawesome.css' %}" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>        <link href="{% static 'network/main-css/node_modules/@fortawesome/fontawesome-free/css/fontawesome.css' %}" rel="stylesheet">
         <link href="{% static 'network/main-css/node_modules/@fortawesome/fontawesome-free/css/brands.css' %}" rel="stylesheet">
         <link href="{% static 'network/main-css/node_modules/@fortawesome/fontawesome-free/css/solid.css' %}" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+        <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
         <link rel="stylesheet" type="text/css" href="{% static 'network/main-css/styles.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'network/main-css/buttons.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'network/main-css/cards.css' %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
         {% block script %}
         {% endblock %}
         
     </head>
     <body>
-        
-        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #009B77;">
-            <a class="navbar-brand" href="{% url 'index' %}">Network</a>
-          
-            <div style="display: flex;justify-content: space-between;">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'index' %}">All Posts</a>
-                </li>
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'profile' user.id %}">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'following' %}">Following</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'mail:mail' %}">Mail</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">Log In</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'register' %}">Register</a>
-                    </li>
-                {% endif %}
-                
-              </ul>
+        <nav class="navbar navbar-expand-sm header">
+            <div class="container-fluid">
+                <div>
+                    <a class="navbar-brand" href="/"><img style="transform: rotate(-4deg);" class='header__logo' alt='YouTube' src="{% static 'network/logo.png' %}"/><span style="margin-left:5px;font-family: Poppins, monaco,Consolas,Lucida Console,monospace;color:rgb(23, 23, 209);font-weight: bolder;">Galactus</span></a>
+
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'index' %}">Network</a>
+                        </li>
+
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'mail:mail' %}">Mail</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'index' %}">Posts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'following' %}">Following</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'profile' user.id %}">Profile</a>
+                        </li>
+                        {% endif %}
+
+
+                        <!-- <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                        </li> -->
+                    </ul>
+                    {% if user.is_authenticated %}
+                        <a class="header__link" href="{% url 'logout' %}"><button class="btn btn-outline-warning btn-sm"><span class="fa fa-sign-out"></span> Log Out</button></a>
+                    {% else %}
+                        <a class="header__link" href="{% url 'login' %}"><button class="btn btn-success btn-sm"><span class="fa fa-sign-in"></span> Log In</button></a>
+                        <a class="header__link" href="{% url 'register' %}"><button class="btn btn-dark btn-sm">Register</button></a>
+                        <a class="header__link" href="{% url 'register' %}"><button class="button-56">Button 56</button></a>
+
+                    {% endif %}
+                    
+                </div>
             </div>
+        </nav>
+        
+        
+        <div class="content">
+
             {% if user.is_authenticated %}
-                <strong class="mr-4" style="margin-left: auto;">Hi {{ user.username | title }}!</strong>
-                <a style="color: black;" href="{% url 'logout' %}"><button class="btn btn-outline-warning">Log Out</button></a>
+            <div class="sidebar">
+                <div style="margin-left:-5px;" class="logo-details">
+                    <i class='bx bx-user logo_name' ></i>
+                    <div class="logo_name">{{ user.username | title }}</div>
+                    <i class='bx bx-menu' id="btn" ></i>
+                </div>
+
+                <ul class="nav-list">
+                    <li>
+                        <a href="#">
+                            <i class='bx bx-grid-alt'></i>
+                            <span class="links_name">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bx-user' ></i>
+                            <span class="links_name">Friends</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bx-chat' ></i>
+                            <span class="links_name">Messages</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bx-folder' ></i>
+                            <span class="links_name">Files</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bx-cart-alt' ></i>
+                            <span class="links_name">Order</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bx-heart' ></i>
+                            <span class="links_name">Saved</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class='bx bx-cog' ></i>
+                            <span class="links_name">Settings</span>
+                        </a>
+                    </li>
+                    <li class="profile">
+                        <a href="{% url 'logout' %}"><span class="links_name profile__link">Logout</span><i class='bx bx-log-out' id="log_out" ></i></a>
+                    </li>
+                </ul>
+            </div>
             {% endif %}
-          </nav>
-        
-        
-        <div class="container">
-            {% block body %}
-            {% endblock %}
+
+            <div class="col-10" style="margin-left:auto;margin-right:auto;">
+                <div style="margin-left: 100px;">
+                    <br>
+                    {% block body %}
+                    {% endblock %}
+                </div>
+                
+            </div>
         </div>
+        
     
     </body>
+
+    <script>
+        let sidebar = document.querySelector(".sidebar");
+        let closeBtn = document.querySelector("#btn");
+      
+        closeBtn.addEventListener("click", ()=>{
+          sidebar.classList.toggle("open");
+          menuBtnChange();
+        });
+      
+        function menuBtnChange() {
+            if(sidebar.classList.contains("open")){
+                closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+            }
+            else {
+                closeBtn.classList.replace("bx-menu-alt-right","bx-menu");
+            }
+        }
+      </script>
 </html>

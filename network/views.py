@@ -16,6 +16,7 @@ def index(request):
     pageNumber = request.GET.get('page')
     p = Paginator(allPosts, 10)
     pagePosts = p.get_page(pageNumber)
+    languages = ['Python', 'Java', 'Javascript', 'SQL', 'C', 'Ruby', 'HTML']
     
     try:
         allYourLikes = Like.objects.filter(liker=request.user)
@@ -25,6 +26,7 @@ def index(request):
     
     return render(request, "network/index.html", {
         'posts': pagePosts,
+        'languages': languages,
         'page-num': pageNumber,
         'liked_posts': postsYouLiked
     })

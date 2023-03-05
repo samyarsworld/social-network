@@ -6,17 +6,20 @@ from django.urls import reverse
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-
+from market.decorators import unauthenticated_user
 from .models import User, Post, Follow, Like
 import json
 from django.http import JsonResponse
 
+## NEED TO ADD INPUT CHECKING WITH INFORMATIVE ALERTS
+
+languages = ['Python', 'Java', 'Javascript', 'SQL', 'C', 'Ruby', 'HTML']
+
 def index(request):
     allPosts = Post.objects.all()
     pageNumber = request.GET.get('page')
-    p = Paginator(allPosts, 10)
+    p = Paginator(allPosts, 6)
     pagePosts = p.get_page(pageNumber)
-    languages = ['Python', 'Java', 'Javascript', 'SQL', 'C', 'Ruby', 'HTML']
     
     try:
         allYourLikes = Like.objects.filter(liker=request.user)
@@ -145,10 +148,19 @@ def unfollow(request):
 @login_required
 def createPost(request):
     if request.method == 'POST':
-        content = request.POST['content']
-        post = Post(content=content, owner=request.user)
+        try: 
+            content = request.POST['content']
+            title = request.POST['title']
+            lang = request.POST['lang']
+        except:
+            return redirect('index')
+
+        if lang not in languages:
+            return redirect('index')
+
+        post = Post(content=content, owner=request.user, title=title, lang=lang)
         post.save()
-        return redirect('index')
+        
 
 
 @login_required
@@ -158,7 +170,7 @@ def removePost(request, id):
         post.delete()
         return redirect('index')
 
-
+@unauthenticated_user
 def login_view(request):
     if request.method == "POST":
 
@@ -170,20 +182,21 @@ def login_view(request):
         # Check if authentication successful
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse("index"))
+            return HttpResponseRedirect(reverse("network:index"))
         else:
             return render(request, "network/login.html", {
                 "message": "Invalid username and/or password."
             })
     else:
+
         return render(request, "network/login.html")
 
 
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect(reverse("index"))
+    return HttpResponseRedirect(reverse("network:index"))
 
-
+@unauthenticated_user
 def register(request):
     if request.method == "POST":
         username = request.POST["username"]
@@ -206,6 +219,8 @@ def register(request):
                 "message": "Username already taken."
             })
         login(request, user)
-        return HttpResponseRedirect(reverse("index"))
+        return HttpResponseRedirect(reverse("network:index"))
     else:
         return render(request, "network/register.html")
+
+

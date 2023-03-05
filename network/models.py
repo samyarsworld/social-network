@@ -5,6 +5,7 @@ from django.db import models
 class User(AbstractUser):
     pass
 
+
 class Post(models.Model):
     owner = models.ForeignKey(User, on_delete=models.PROTECT, related_name='posts')
     content = models.CharField(max_length=5000)

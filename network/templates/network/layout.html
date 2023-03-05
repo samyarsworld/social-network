@@ -19,7 +19,7 @@
         <link rel="stylesheet" type="text/css" href="{% static 'network/main-css/cards.css' %}">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
         {% block script %}
         {% endblock %}
@@ -29,8 +29,7 @@
         <nav class="navbar navbar-expand-sm header">
             <div class="container-fluid">
                 <div>
-                    <a class="navbar-brand" href="/"><img style="transform: rotate(-4deg);" class='header__logo' alt='YouTube' src="{% static 'network/logo.png' %}"/><span style="margin-left:5px;font-family: Poppins, monaco,Consolas,Lucida Console,monospace;color:rgb(23, 23, 209);font-weight: bolder;">Galactus</span></a>
-
+                    <a class="navbar-brand" href="/"><img style="transform: rotate(-4deg);" class='header__logo' alt='img' src="{% static 'waves.png' %}"/><span class="logo__title">Galactus</span></a>
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa-solid fa-bars"></i>
@@ -38,22 +37,36 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-sm-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'index' %}">Network</a>
+                        <li class="nav-item" style="font-weight: bolder;">
+                            <a class="nav-link" href="{% url 'network:index' %}">Network</a>
                         </li>
-
                         {% if user.is_authenticated %}
-                        <li class="nav-item">
+                        <li class="nav-item" style="font-weight: bolder;">
+                            <a class="nav-link" href="{% url 'auction:feed' %}">Auction</a>
+                        </li>
+                        <li class="nav-item" style="font-weight: bolder;">
                             <a class="nav-link" href="{% url 'mail:mail' %}">Mail</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'index' %}">Posts</a>
+                            <a class="nav-link" href="{% url 'auction:feed' %}">Listings</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'following' %}">Following</a>
+                            <a class="nav-link" href="{% url 'auction:create_listing' %}">Sell</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'profile' user.id %}">Profile</a>
+                            <a class="nav-link" href="{% url 'auction:watchlist' %}">Watchlists</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'market:home' %}">Market</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'network:index' %}">Posts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'network:following' %}">Following</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'network:profile' user.id %}">Profile</a>
                         </li>
                         {% endif %}
 
@@ -71,11 +84,11 @@
                         </li> -->
                     </ul>
                     {% if user.is_authenticated %}
-                        <a class="header__link" href="{% url 'logout' %}"><button class="btn btn-outline-warning btn-sm"><span class="fa fa-sign-out"></span> Log Out</button></a>
+                        <a class="header__link" href="{% url 'network:logout' %}"><button class="btn btn-outline-warning btn-sm"><span class="fa fa-sign-out"></span> Log Out</button></a>
                     {% else %}
-                        <a class="header__link" href="{% url 'login' %}"><button class="btn btn-success btn-sm"><span class="fa fa-sign-in"></span> Log In</button></a>
-                        <a class="header__link" href="{% url 'register' %}"><button class="btn btn-dark btn-sm">Register</button></a>
-                        <a class="header__link" href="{% url 'register' %}"><button class="button-56">Button 56</button></a>
+                        <a class="header__link" href="{% url 'network:login' %}"><button class="btn btn-success btn-sm"><span class="fa fa-sign-in"></span> Log In</button></a>
+                        <a class="header__link" href="{% url 'network:register' %}"><button class="btn btn-dark btn-sm">Register</button></a>
+                        <a class="header__link" href="{% url 'network:register' %}"><button class="button-56">Button 56</button></a>
 
                     {% endif %}
                     
@@ -87,61 +100,7 @@
         <div class="content">
 
             {% if user.is_authenticated %}
-            <div class="sidebar">
-                <div style="margin-left:-5px;" class="logo-details">
-                    <i class='bx bx-user logo_name' ></i>
-                    <div class="logo_name">{{ user.username | title }}</div>
-                    <i class='bx bx-menu' id="btn" ></i>
-                </div>
-
-                <ul class="nav-list">
-                    <li>
-                        <a href="#">
-                            <i class='bx bx-grid-alt'></i>
-                            <span class="links_name">Dashboard</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class='bx bx-user' ></i>
-                            <span class="links_name">Friends</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class='bx bx-chat' ></i>
-                            <span class="links_name">Messages</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class='bx bx-folder' ></i>
-                            <span class="links_name">Files</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class='bx bx-cart-alt' ></i>
-                            <span class="links_name">Order</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class='bx bx-heart' ></i>
-                            <span class="links_name">Saved</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class='bx bx-cog' ></i>
-                            <span class="links_name">Settings</span>
-                        </a>
-                    </li>
-                    <li class="profile">
-                        <a href="{% url 'logout' %}"><span class="links_name profile__link">Logout</span><i class='bx bx-log-out' id="log_out" ></i></a>
-                    </li>
-                </ul>
-            </div>
+                {% include 'network/sidebar.html' %}
             {% endif %}
 
             <div class="col-10" style="margin-left:auto;margin-right:auto;">

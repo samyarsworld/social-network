@@ -26,7 +26,7 @@ function compose_email() {
 
 function email_view(id) {
   // Displaying the email
-  fetch(`mail/emails/${id}`)
+  fetch(`emails/${id}`)
   .then(response => response.json())
   .then(email => {
       document.querySelector('#emails-view').style.display = 'none';
@@ -53,7 +53,7 @@ function email_view(id) {
 
       // Changing to read
       if (!email.read) {
-        fetch(`mail/emails/${id}`, {
+        fetch(`emails/${id}`, {
           method: 'PUT',
           body: JSON.stringify({
             read: true
@@ -66,7 +66,7 @@ function email_view(id) {
       btn.innerHTML = email.archived ? 'Unarchive' : 'Archive';
       btn.className = email.archived ? 'btn btn-success' : 'btn btn-danger';
       btn.addEventListener('click', () => {
-        fetch(`mail/emails/${id}`, {
+        fetch(`emails/${id}`, {
           method: 'PUT',
           body: JSON.stringify({
             archived: !email.archived
@@ -116,7 +116,7 @@ function load_mailbox(mailbox) {
   
   const hr = document.createElement('hr');
   // Displaying the emails
-  fetch(`mail/emails/${mailbox}`)
+  fetch(`emails/${mailbox}`)
   .then(response => response.json())
   .then(emails => {
       emails.sort((a, b) => (a.timestamp < b.timestamp) ? 1 : -1)
@@ -182,7 +182,7 @@ function send_email(event) {
   const subject = document.querySelector('#compose-subject').value;
   const body = document.querySelector('#compose-body').value;
 
-  fetch('mail/emails', {
+  fetch('emails', {
     method: 'POST',
     body: JSON.stringify({
         recipients: recipients,

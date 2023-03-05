@@ -4,6 +4,14 @@ body {
   color: white;
 }
 
+h1, h2, h3, h4, h5 {
+  font-family: monaco,Consolas,Lucida Console,monospace;
+}
+
+.nav-item > a {
+  font-family: monaco,Consolas,Lucida Console,monospace;
+}
+
 .header {
     background-color: #009B77;
     position: sticky;
@@ -23,6 +31,12 @@ body {
     padding-bottom: 2px;
 }
 
+.logo__title {
+  color: rgb(26, 0, 67);
+  font-weight: bolder;
+  margin-left:5px;
+
+}
 .nav-link {
     color: black;
 }
@@ -71,6 +85,15 @@ body {
   width: 150px;
 }
 
+#user_icon {
+  opacity: 0;
+}
+
+.sidebar.open #user_icon{
+  opacity: 1;
+}
+
+
 .sidebar .logo-details{
   height: 60px;
   display: flex;
@@ -81,7 +104,7 @@ body {
   opacity: 0;
   transition: all 0.5s ease;
 }
-.sidebar .logo-details .logo_name{
+.sidebar .logo-details .logo_name {
   color: #fff;
   font-size: 16px;
   font-weight: 600;
@@ -89,7 +112,7 @@ body {
   transition: all 0.5s ease;
 }
 
-.sidebar.open .logo-details .logo_name{
+.sidebar.open .logo-details .logo_name {
   opacity: 1;
 }
 
@@ -211,7 +234,6 @@ body {
   .sidebar.open .links_name{
     font-size: 12px;
   }
-
   .sidebar.open li{
     margin-left: -18px;
   }
@@ -220,6 +242,9 @@ body {
   }
   .sidebar.open .profile__link {
     margin-left: 15px;
+  }
+  .logo_name {
+    display: none;
   }
 }
 

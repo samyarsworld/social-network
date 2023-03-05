@@ -1,0 +1,55 @@
+<div class="sidebar open">
+    <div style="margin-left:-5px;" class="logo-details">
+        <i class='bx bx-user' id="user_icon"></i>
+        <div class="logo_name">{{ user.username | title }}</div>
+        <i class='bx bx-menu' id="btn" ></i>
+    </div>
+
+    <ul class="nav-list">
+        <li>
+            <a href="#">
+                <i class='bx bx-grid-alt'></i>
+                <span class="links_name">Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bx-user' ></i>
+                <span class="links_name">Friends</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bx-chat' ></i>
+                <span class="links_name">Messages</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bx-folder' ></i>
+                <span class="links_name">Files</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bx-cart-alt' ></i>
+                <span class="links_name">Order</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bx-heart' ></i>
+                <span class="links_name">Saved</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bx-cog' ></i>
+                <span class="links_name">Settings</span>
+            </a>
+        </li>
+        <li class="profile">
+            <a href="{% url 'network:logout' %}"><span class="links_name profile__link">Logout</span><i class='bx bx-log-out' id="log_out" ></i></a>
+        </li>
+    </ul>
+</div>

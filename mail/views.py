@@ -6,9 +6,7 @@ from django.http import JsonResponse
 from django.shortcuts import HttpResponse, HttpResponseRedirect, render
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-from django.conf import settings
 from network.models import User
-
 from .models import Email
 
 

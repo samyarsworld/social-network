@@ -2,14 +2,14 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-from .models import Comment, Listing, Bid, Category
+from .models import ListingComment, Listing, Bid, Category
 from .forms import CreateListingForm
 
 
-def feed(request):
+def home(request):
     listings = Listing.objects.filter(is_active=True)
     categories = Category.objects.all()
-    return render(request, "auction/feed.html", {
+    return render(request, "auction/home.html", {
         'listings': listings,
         'categories': categories
     })
@@ -27,7 +27,7 @@ def createListing(request):
 
         listing.save()
 
-        return redirect(reverse('auction:feed'))
+        return redirect(reverse('auction:home'))
         
     form = CreateListingForm()
     return render(request, 'auction/createListing.html', {
@@ -50,7 +50,7 @@ def category(request):
 @login_required
 def listing(request, listing_id):
     listing = Listing.objects.get(id=listing_id)
-    comments = Comment.objects.filter(listing=listing)
+    comments = ListingComment.objects.filter(listing=listing)
     if listing in request.user.user_watchlists.all():
         watchlist = True
     else:
@@ -94,7 +94,7 @@ def addComment(request):
         id = request.POST['listing_id']
         listing = Listing.objects.get(id=id)
         content = request.POST['comment']
-        comment = Comment(content=content, listing=listing, author=request.user)
+        comment = ListingComment(content=content, listing=listing, author=request.user)
         comment.save()
 
         return redirect(reverse('auction:listing', args = (listing.id,)))
@@ -107,7 +107,7 @@ def addBid(request):
         listing = Listing.objects.get(id=id)
         bid = float(request.POST['bid'])
         current_bid = listing.price.bid
-        comments = Comment.objects.filter(listing=listing)
+        comments = ListingComment.objects.filter(listing=listing)
         if listing in request.user.user_watchlists.all():
             watchlist = True
         else:
@@ -139,7 +139,7 @@ def removeListing(request, listing_id):
     if request.method == 'POST':
         listing = Listing.objects.get(id=listing_id)
         listing.delete()
-        return redirect(reverse('auction:feed'))
+        return redirect(reverse('auction:home'))
 
 @login_required
 def sellListing(request, listing_id):
@@ -148,7 +148,7 @@ def sellListing(request, listing_id):
         listing.is_active = False
         listing.save()
         buyer = listing.price.bid_owner
-        comments = Comment.objects.filter(listing=listing)
+        comments = ListingComment.objects.filter(listing=listing)
 
 
         return render(request, 'auction/listing.html', {

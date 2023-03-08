@@ -1,0 +1,88 @@
+{% extends "network/layout.html" %}
+{% load static %}
+{% block body %}
+    <style>
+        body {
+            background-color: #878acd;
+            color: black;
+        }
+    </style>
+   
+
+    <h2>{{ post.title | title }}</h2>
+    <hr>
+
+    <div class="row">
+
+        <!-- {% if saved %}
+        <form class="ml-3 mr-2" action="{% url 'auction:remove-watchlist' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="post_id" value="{{ post.id }}">
+            <input class="btn btn-danger" type="submit" value="Remove from watchlist"> 
+        </form>
+        {% else %}
+        <form class="ml-3 mr-2" action="{% url 'auction:add-watchlist' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="post_id" value="{{ post.id }}">
+            <input class="btn btn-success" type="submit" value="Add to watchlist">
+        </form>
+        {% endif %} -->
+
+        {% if user == post.owner %}
+            <form class="mr-2" action="{% url 'network:remove-post' post.id %}" method="post">
+                {% csrf_token %}
+                <input class="btn btn-danger" type="submit" value="Remove post">
+            </form>
+        {% endif %}
+        
+    </div>
+    
+    <br>
+
+    <h2>Description:</h2>
+    <p>{{ post.content }}</p>
+    <hr>
+    <p>Post owner: {{ post.owner | title }}</p>
+    <p><i class="fa-solid fa-heart"></i> likes: {{ post.likes }}</p>
+    
+    <hr>
+    
+
+    {% if user != post.owner %}
+        <div class="row">
+            <div class="col">
+                <h4><span class="badge bg-info">Place a comment:</span></h4>
+                
+                <form action="{% url 'network:add-comment' %}" method="post">
+                    {% csrf_token %}
+                    <textarea rows="4" cols="30" type="text" name="comment"></textarea>
+                    <input type="hidden" name="post_id" value="{{ post.id }}">
+                    <button style="margin-top: 20px;" type="submit" class="button-53" style="background-color: #3DD1E7;">Post</button>
+
+                </form>
+            </div> 
+        </div>
+        <hr>
+    {% endif %}
+        
+        
+
+    <h2>Comments</h2>
+
+    <br>
+
+    <div class="row mx-3">
+        <div class="col">
+            <ul class="list-group">
+                {% for comment in comments %}
+                    <li class="list-group-item">
+                        <p>{{ comment.content }}</p>
+                        <small class="text-muted">Author: {{ comment.author | title  }}</small>
+                    </li>
+
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}

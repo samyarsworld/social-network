@@ -1,30 +1,33 @@
 {% extends "network/layout.html" %}
 
 {% block body %}
-<div style="margin-left: 50px; margin-top:50px">
-    <h2 style="font-weight: bold;margin-bottom: 20px;">Login to your account</h2>
+<div style="margin-top:50px;margin-left: auto;margin-right: auto;max-width: 500px;">
+    <div style="margin-left: -100px;">
+        <h2 style="font-weight: bold;margin-bottom: 20px;">Login to your account</h2>
 
-    {% if message %}
-        <div style="color: red;">{{ message }}</div>
-    {% endif %}
-
-    <form action="{% url 'network:login' %}" method="post">
-        {% csrf_token %}
-        <div class="form-group">
-            <input autofocus class="form-control mt-2" type="text" name="username" placeholder="Username">
-        </div>
-        <div class="form-group mt-2">
-            <input class="form-control" type="password" name="password" placeholder="Password">
-        </div>
-        <div class="form-group form-check mt-2">
-            <input type="checkbox" class="form-check-input" id="signedin" name="checkbox">
-            <label class="form-check-label" for="signedin" style="font-size: 14px;">Keep me signed in</label>
-        </div>
-        <button style="background-color: #27cd67; margin-top: 20px;margin-bottom: 10px;" role="input" class="button-53" type="submit">Login</button>
-
-    </form>
+        {% if message %}
+            <div style="color: red;">{{ message }}</div>
+        {% endif %}
     
-    <small>Don't have an account? <a href="{% url 'network:register' %}">Register here.</a></small>
+        <form action="{% url 'network:login' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <input autofocus class="form-control mt-2" type="text" name="username" placeholder="Username">
+            </div>
+            <div class="form-group mt-2">
+                <input class="form-control" type="password" name="password" placeholder="Password">
+            </div>
+            <div class="form-group form-check mt-2">
+                <input type="checkbox" class="form-check-input" id="signedin" name="checkbox">
+                <label class="form-check-label" for="signedin" style="font-size: 14px;">Keep me signed in</label>
+            </div>
+            <button style="background-color: #27cd67; margin-top: 20px;margin-bottom: 10px;" role="input" class="button-53" type="submit">Login</button>
+    
+        </form>
+        
+        <small>Don't have an account? <a href="{% url 'network:register' %}">Register here.</a></small>
+    </div>
+   
 </div>
     
 {% endblock %}

@@ -30,3 +30,11 @@ class Like(models.Model):
 
     def __str__(self):
         return f"{self.liker} liked {self.post}"
+
+class PostComment(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='network_user_comments')
+    content = models.CharField(max_length=400)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, blank=True, related_name='network_post_comments')
+
+    def __str__(self):
+        return f'Written by {self.author}'

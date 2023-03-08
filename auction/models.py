@@ -31,10 +31,10 @@ class Listing(models.Model):
         return self.name
 
 
-class Comment(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True, related_name='user_comments')
+class ListingComment(models.Model):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True, related_name='auction_user_comments')
     content = models.CharField(max_length=400)
-    listing = models.ForeignKey(Listing, on_delete=models.CASCADE, null=True, blank=True, related_name='listing_comments')
+    listing = models.ForeignKey(Listing, on_delete=models.CASCADE, null=True, blank=True, related_name='auction_listing_comments')
 
     def __str__(self):
         return f'Written by {self.author}'

@@ -1,0 +1,48 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark header">
+    <div>
+        <a class="navbar-brand brand-logo" href="/"><img class='header-logo' src="{% static 'waves.png' %}"/>
+        <span class="header-logo-title">
+            <span style="color:#ff0266">G</span><span style="color: #264d94;">a</span>la<span style="color:#6a1b67">ctu</span><span style="color:#264d94">s</span>
+        </span></a>
+    </div>
+    
+    {% if user.is_authenticated %}
+    <div class="collapse navbar-collapse header-middle" id="header-nav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item header-item dropdown first-item">
+                <a class="nav-link dropdown-toggle" href="{% url 'network:home' %}" id="dropdownNetwork" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Network</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownNetwork">
+                    <a class="dropdown-item" href="{% url 'network:home' %}">Home</a>
+                    <a class="dropdown-item" href="{% url 'network:profile' user.id %}">Profile</a>
+                    <a class="dropdown-item" href="{% url 'network:following' %}">Following</a>
+                </div>
+            </li>
+            <li class="nav-item header-item active">
+                <a class="nav-link" href="{% url 'mail:mail' %}">Mail</a>
+            </li>
+            <li class="nav-item header-item dropdown">
+                <a class="nav-link dropdown-toggle" href="{% url 'auction:home' %}" id="dropdownAuction" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Auction</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownAuction">
+                    <a class="dropdown-item" href="{% url 'auction:home' %}">Home</a>
+                    <a class="dropdown-item" href="{% url 'auction:create-listing' %}">Sell</a>
+                    <a class="dropdown-item" href="{% url 'auction:watchlist' %}">Watchlist</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    {% endif %}
+    <div class="header-right">
+        {% if user.is_authenticated %}
+            <a class="nav-header-link"  href="{% url 'network:logout' %}"><button class="btn btn-outline-warning btn-sm header-logout"><span class="fa fa-sign-out"></span></button></a>
+            <button class="navbar-toggler header-toggler" type="button" data-toggle="collapse" data-target="#header-nav" aria-controls="header-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        {% else %}
+            <a class="nav-header-link" href="{% url 'network:login' %}"><button class="btn btn-success btn-sm"><span class="fa fa-sign-in"></span> Log In</button></a>
+            <a class="nav-header-link" href="{% url 'network:register' %}"><button class="btn btn-dark btn-sm">Register</button></a>
+            <!-- <a class="nav-header-link" href="{% url 'network:register' %}"><button class="button-56">Button 56</button></a> -->
+        {% endif %}
+    </div>
+</nav>

@@ -9,7 +9,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("network/", include("network.urls")),
     path("mail/", include("mail.urls")),
-    path('market/', include("market.urls")),
     path('auction/', include("auction.urls"))
 ]
 

@@ -6,16 +6,14 @@ from django.urls import reverse
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from market.decorators import unauthenticated_user
-from .models import User, Post, Follow, Like
+from network.decorators import unauthenticated_user
+from .models import User, Post, Follow, Like, PostComment
 import json
 from django.http import JsonResponse
 
-## NEED TO ADD INPUT CHECKING WITH INFORMATIVE ALERTS
-
 languages = ['Python', 'Java', 'Javascript', 'SQL', 'C', 'Ruby', 'HTML']
 
-def index(request):
+def home(request):
     allPosts = Post.objects.all()
     pageNumber = request.GET.get('page')
     p = Paginator(allPosts, 6)
@@ -27,12 +25,33 @@ def index(request):
     except:
         postsYouLiked = []
     
-    return render(request, "network/index.html", {
+    return render(request, "network/home.html", {
         'posts': pagePosts,
         'languages': languages,
         'page-num': pageNumber,
         'liked_posts': postsYouLiked
     })
+
+
+@login_required
+def post(request, post_id):
+    post = Post.objects.get(id=post_id)
+    comments = PostComment.objects.filter(post=post)
+    return render(request, "network/post.html", {
+        'post': post,
+        'comments': comments
+    })
+
+
+@login_required
+def addComment(request):
+    if request.method == 'POST':
+        post_id = request.POST['post_id']
+        post = Post.objects.get(id=post_id)
+        content = request.POST['comment']
+        comment = PostComment(content=content, post=post, author=request.user)
+        comment.save()
+        return redirect(reverse('network:post', args = (post.id,)))
 
 
 @login_required
@@ -44,7 +63,7 @@ def like(request, post_id):
         post.likes = post.likes + 1
         post.save()
         newLike.save()
-        return JsonResponse({"message": "Like successful"})
+        return JsonResponse({"message": post.likes})
 
 
 @login_required
@@ -56,7 +75,7 @@ def unlike(request, post_id):
         post.likes = post.likes - 1
         post.save()
         like.delete()
-        return JsonResponse({"message": "Like removed"})
+        return JsonResponse({"message": post.likes})
 
 
 @login_required
@@ -153,14 +172,15 @@ def createPost(request):
             title = request.POST['title']
             lang = request.POST['lang']
         except:
-            return redirect('index')
+            return redirect('network:home')
 
-        if lang not in languages:
-            return redirect('index')
+        if lang not in languages or not title or not content:
+            return redirect('network:home')
 
         post = Post(content=content, owner=request.user, title=title, lang=lang)
         post.save()
         
+        return redirect('network:home')
 
 
 @login_required
@@ -168,7 +188,12 @@ def removePost(request, id):
     if request.method == 'POST':
         post = Post.objects.get(id=id)
         post.delete()
-        return redirect('index')
+        return redirect('network:home')
+
+
+
+
+
 
 @unauthenticated_user
 def login_view(request):
@@ -182,19 +207,18 @@ def login_view(request):
         # Check if authentication successful
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse("network:index"))
+            return HttpResponseRedirect(reverse("network:home"))
         else:
             return render(request, "network/login.html", {
                 "message": "Invalid username and/or password."
             })
     else:
-
         return render(request, "network/login.html")
 
 
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect(reverse("network:index"))
+    return HttpResponseRedirect(reverse("network:home"))
 
 @unauthenticated_user
 def register(request):
@@ -219,7 +243,7 @@ def register(request):
                 "message": "Username already taken."
             })
         login(request, user)
-        return HttpResponseRedirect(reverse("network:index"))
+        return HttpResponseRedirect(reverse("network:home"))
     else:
         return render(request, "network/register.html")
 

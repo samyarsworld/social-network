@@ -1,6 +1,14 @@
 {% extends "network/layout.html" %}
 {% load static %}
 {% block body %}
+    <style>
+        body {
+            background-color: #cd87cb;
+            color: black;
+        }
+    </style>
+   
+
     <h2>Details for {{ listing }}</h2>
     <h4>Listing price: ${{ listing.price.bid }}</h4>
     <hr>
@@ -18,13 +26,13 @@
 
     {% if user.is_authenticated and listing.is_active %}
         {% if watchlist %}
-        <form class="ml-3 mr-2" action="{% url 'auction:remove_watchlist' %}" method="post">
+        <form class="ml-3 mr-2" action="{% url 'auction:remove-watchlist' %}" method="post">
             {% csrf_token %}
             <input type="hidden" name="listing_id" value="{{ listing.id }}">
             <input class="btn btn-danger" type="submit" value="Remove from watchlist"> 
         </form>
         {% else %}
-        <form class="ml-3 mr-2" action="{% url 'auction:add_watchlist' %}" method="post">
+        <form class="ml-3 mr-2" action="{% url 'auction:add-watchlist' %}" method="post">
             {% csrf_token %}
             <input type="hidden" name="listing_id" value="{{ listing.id }}">
             <input class="btn btn-success" type="submit" value="Add to watchlist">
@@ -32,12 +40,12 @@
         {% endif %}
     {% if user == listing.owner %}
     
-        <form class="mr-2" action="{% url 'auction:remove_listing' listing.id %}" method="post">
+        <form class="mr-2" action="{% url 'auction:remove-listing' listing.id %}" method="post">
             {% csrf_token %}
             <input class="btn btn-danger" type="submit" value="Remove listing">
         </form>
         {% if listing.price.bid > 1000 %}
-            <form action="{% url 'auction:sell_listing' listing.id %}" method="post">
+            <form action="{% url 'auction:sell-listing' listing.id %}" method="post">
                 {% csrf_token %}
                 <input class="btn btn-info" type="submit" value="Sell listing">
             </form>
@@ -64,7 +72,7 @@
     {% if user.is_authenticated %}
         {% if listing.is_active and user != listing.owner %}
             <h4><span class="badge badge-warning">Place bid:</span></h4>
-            <form action="{% url 'auction:add_bid' %}" method="post">
+            <form action="{% url 'auction:add-bid' %}" method="post">
                 {% csrf_token %}
                 <input min="0" type="number" name="bid">
                 <input type="hidden" name="listing_id" value="{{ listing.id }}">
@@ -87,7 +95,7 @@
         {% if user.is_authenticated and user != listing.owner %}
             <div class="row">
                 <div class="col">
-                    <form action="{% url 'auction:add_comment' %}" method="post">
+                    <form action="{% url 'auction:add-comment' %}" method="post">
                         {% csrf_token %}
                         <label for="comment"><span style="font-size: 16px ;" class="badge badge-info">Place a comment:</span></label>
                         <input style="width:50%" type="text" name="comment">

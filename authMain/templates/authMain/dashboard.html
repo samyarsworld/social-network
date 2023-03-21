@@ -1,0 +1,102 @@
+{% extends "authMain/layout.html" %}
+{% load static %}
+{% block body %}
+
+    <style>
+        body {
+            background-color: azure;
+            color: brown;
+        }
+        a {
+            text-decoration: none;
+            color: black;
+        }
+        a:hover {
+            color: black;
+        }
+        .card {
+            margin: auto;
+            margin-top: 50px;
+            width: 18rem;
+            height: 450px;
+        }
+        .card-img-top {
+            margin-top: 10px;
+            height: 250px;
+        }
+        #network-card {
+            background-color: #00B8D4;
+        }
+        #auction-card {
+            background-color: #c7006e;
+        }
+        #mail-card {
+            background-color: #00E676;
+;
+        }
+        .card-title {
+            font-weight: bolder;
+        }
+        body {
+            background-color: rgb(26, 0, 67);
+            color: white;
+        }
+    </style>
+
+    {% if user.is_authenricated %}
+    <div class="row">
+        <div class="col-12">
+            <h4>Hello {{ user.username }}</h4>
+            
+            <p>
+                Name
+                Occupation
+                Date joined
+            </p>
+            <p>
+                Followers
+                Following
+                Posts
+            </p>
+            
+        </div> 
+    </div>
+  
+    <hr style="margin-top: 50px;">
+    {% endif %}
+  
+    <div class="row" style="margin-bottom:100px">
+        <div class="card" id="network-card">
+            <a href="{% url 'network:home' %}">
+                <img src="{% static 'images/network.png' %}" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">Social Network</h5>
+                    <p class="card-text">Connect With Ease: Introducing the modern networking app where you connect with ease to your fellow coders.</p>
+                </div>
+            </a>
+        </div>
+        <div class="card" id="auction-card">
+            <a href="{% url 'auction:home' %}">
+                <img src="{% static 'images/auction.png' %}" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">Auction</h5>
+                    <p class="card-text">Bid to Win: The ultimate auction app for buyers and sellers for intergalactic equipment and ships.</p>
+                </div>
+            </a>
+        </div>
+        <div class="card" id="mail-card">
+            <a href="{% url 'mail:mail' %}">
+                <img src="{% static 'images/mail.png' %}" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">Mail</h5>
+                    <p class="card-text">Effortlessly Manage Your Email: The next-gen email app you need to connect with your community.</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+ 
+</div>
+  
+    
+{% endblock %}

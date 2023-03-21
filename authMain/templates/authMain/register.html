@@ -1,4 +1,4 @@
-{% extends "network/layout.html" %}
+{% extends "authMain/layout.html" %}
 
 {% block body %}
 <div style="margin-top:50px;margin-left: auto;margin-right: auto;max-width: 500px;">
@@ -9,7 +9,7 @@
             <div>{{ message }}</div>
         {% endif %}
     
-        <form action="{% url 'network:register' %}" method="post">
+        <form action="{% url 'register' %}" method="post">
             {% csrf_token %}
             <div class="form-group mt-2">
                 <input class="form-control" autofocus type="text" name="username" placeholder="Username">
@@ -25,7 +25,7 @@
             </div>
             <button style="background-color: #5f27cd; margin-top: 20px;margin-bottom: 10px;" role="input" class="button-53" type="submit">Register</button>
         </form>
-        <small>Already have an account? <a href="{% url 'network:login' %}">Log In here.</a></small>    
+        <small>Already have an account? <a href="{% url 'login' %}">Log In here.</a></small>    
     </div> 
 </div>
 

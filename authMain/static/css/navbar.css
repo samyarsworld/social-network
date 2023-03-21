@@ -40,7 +40,13 @@
     transition: border-bottom 0.5s ease-in-out;
     font-weight: bolder;
     font-size: 14px;
-    margin-left: 50px;
+    margin-left: 90px;
+}
+
+@media only screen and (min-width:1200px) {
+    .header-item {
+        margin-left: 250px;
+    }
 }
 
 .dropdown-item {
@@ -57,7 +63,7 @@
 }
 
 .dropdown-menu {
-    background-color: rgb(53, 52, 52);
+    background-color: rgb(54, 3, 66);
 }
 
 

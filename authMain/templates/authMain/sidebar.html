@@ -7,7 +7,7 @@
 
     <ul class="nav-list">
         <li>
-            <a href="#">
+            <a href="{% url 'dashboard' %}">
                 <i class='bx bx-grid-alt'></i>
                 <span class="links-name">Dashboard</span>
             </a>
@@ -27,7 +27,13 @@
         <li>
             <a href="#">
                 <i class='bx bx-folder' ></i>
-                <span class="links-name">Files</span>
+                <span class="links-name">Listings</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class='bx bx-folder' ></i>
+                <span class="links-name">Posts</span>
             </a>
         </li>
         <li>
@@ -43,13 +49,13 @@
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="{% url 'network:profile' user.id %}">
                 <i class='bx bx-cog' ></i>
                 <span class="links-name">Settings</span>
             </a>
         </li>
         <li class="profile">
-            <a href="{% url 'network:logout' %}"><span class="links-name profile-link">Logout</span><i class='bx bx-log-out' id="log_out" ></i></a>
+            <a href="{% url 'logout' %}"><span class="links-name profile-link">Logout</span><i class='bx bx-log-out' id="log_out" ></i></a>
         </li>
     </ul>
 </div>

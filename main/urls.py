@@ -5,8 +5,9 @@ from django.shortcuts import redirect
 
 
 urlpatterns = [
-    path("", lambda request: redirect('network/', permanent=True)),
     path("admin/", admin.site.urls),
+    # path("", lambda request: redirect('network/', permanent=True)),
+    path("", include("authMain.urls")),
     path("network/", include("network.urls")),
     path("mail/", include("mail.urls")),
     path('auction/', include("auction.urls"))

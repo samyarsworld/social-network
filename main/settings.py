@@ -84,8 +84,6 @@ DATABASES = {
     }
 }
 
-AUTH_USER_MODEL = "authMain.User"
-
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -124,8 +122,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Additional directories for static files
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
+# Redirect route if not logged in
 LOGIN_URL = 'login'
+
+# Main user model
+AUTH_USER_MODEL = "authMain.User"

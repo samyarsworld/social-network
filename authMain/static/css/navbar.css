@@ -1,113 +1,107 @@
 .header-item > a {
-    font-family: monaco,Consolas,Lucida Console,monospace;
-  }
+  font-family: monaco, Consolas, Lucida Console, monospace;
+}
 
 .header {
-    /* background-color: #009B77; */
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
+  /* background-color: #009B77; */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
 }
 
 .header-link {
-    color: black;
-    margin-right: 10px;
-    text-decoration: none;
+  color: black;
+  margin-right: 10px;
 }
 
 .header-logo {
-    padding: 4px;
-    height: 60px;
-    padding-bottom: 2px;
-    transform: rotate(-4deg);
+  padding: 4px;
+  height: 60px;
+  padding-bottom: 2px;
+  transform: rotate(-4deg);
 }
 
 .header-logo-title {
-  color: #009B77;
+  color: #009b77;
   font-weight: bolder;
-  margin-left:5px;
+  margin-left: 5px;
 }
-
 
 .brand-logo {
-    margin-left: 20px;
+  margin-left: 20px;
 }
-
 
 .header-item {
-    transition: border-bottom 0.5s ease-in-out;
-    font-weight: bolder;
-    font-size: 14px;
-    margin-left: 90px;
+  transition: border-bottom 0.5s ease-in-out;
+  font-weight: bolder;
+  font-size: 14px;
+  margin-left: 90px;
 }
 
-@media only screen and (min-width:1200px) {
-    .header-item {
-        margin-left: 250px;
-    }
+@media only screen and (min-width: 1200px) {
+  .header-item {
+    margin-left: 250px;
+  }
 }
 
 .dropdown-item {
-    font-size: 14px;
+  font-size: 14px;
 }
-
 
 .header-item:hover {
-    border-bottom: 1px solid red;
+  border-bottom: 1px solid red;
 }
 
 .dropdown-item {
-    color: #FFF;
+  color: #fff;
 }
 
 .dropdown-menu {
-    background-color: rgb(54, 3, 66);
+  background-color: rgb(54, 3, 66);
 }
-
 
 .header-toggler {
-    margin-top: 5px;
+  margin-top: 5px;
 }
 .header-logout {
-    margin-right: 10px;
-    margin-top: -5px;
+  margin-right: 10px;
+  margin-top: -5px;
 }
 
 .header-right {
-    margin-right: 30px;
+  margin-right: 30px;
 }
 
 .first-item {
-    margin-left: -50px;
+  margin-left: -50px;
 }
 
 .header-middle {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 @media only screen and (max-width: 760px) {
-    .header-middle{
-        display: block;
-    }
+  .header-middle {
+    display: block;
+  }
 
-    .header-right {
-        margin-left:10px
-    }
+  .header-right {
+    margin-left: 10px;
+  }
 
-    .header-item {
-        margin-left: 10px;
-    }
-    .first-item {
-        margin-top: 10px;
-    }
+  .header-item {
+    margin-left: 10px;
+  }
+  .first-item {
+    margin-top: 10px;
+  }
 }
 
-
 @media only screen and (min-width: 765px) {
-    .header-logout {
-        margin-top: 5px;
-    }
+  .header-logout {
+    margin-top: 5px;
+  }
 }

@@ -6,9 +6,9 @@
         <h2 style="font-weight: bold;margin-bottom: 20px;">Login to your account</h2>
 
         {% if message %}
-            <div style="color: red;">{{ message }}</div>
+        <div class="message">{{ message }}</div>
         {% endif %}
-    
+
         <form action="{% url 'login' %}" method="post">
             {% csrf_token %}
             <div class="form-group">
@@ -21,12 +21,13 @@
                 <input type="checkbox" class="form-check-input" id="signedin" name="checkbox">
                 <label class="form-check-label" for="signedin" style="font-size: 14px;">Keep me signed in</label>
             </div>
-            <button style="background-color: #27cd67; margin-top: 20px;margin-bottom: 10px;" role="input" class="button-53" type="submit">Login</button>
-    
+            <button style="background-color: #27cd67; margin-top: 20px;margin-bottom: 10px;" role="input"
+                class="button-53" type="submit">Login</button>
+
         </form>
-        
+
         <small>Don't have an account? <a href="{% url 'register' %}">Register here.</a></small>
     </div>
 </div>
-    
+
 {% endblock %}

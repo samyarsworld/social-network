@@ -1,8 +1,10 @@
 <div class="sidebar open">
     <div style="margin-left:-5px;" class="logo-details">
-        <i class='bx bx-user' id="user_icon"></i>
-        <div class="logo-name">{{ user.username | title }}</div>
-        <i class='bx bx-menu' id="btn" ></i>
+        <a href="{% url 'network:profile' user.id %}">
+            <i class='bx bx-user' id="user_icon"></i>
+        </a>
+
+        <i class='bx bx-menu' id="btn"></i>
     </div>
 
     <ul class="nav-list">
@@ -14,48 +16,49 @@
         </li>
         <li>
             <a href="#">
-                <i class='bx bx-user' ></i>
+                <i class='bx bx-user'></i>
                 <span class="links-name">Friends</span>
             </a>
         </li>
         <li>
             <a href="{% url 'mail:mail' %}">
-                <i class='bx bx-chat' ></i>
+                <i class='bx bx-chat'></i>
                 <span class="links-name">Messages</span>
             </a>
         </li>
         <li>
             <a href="#">
-                <i class='bx bx-folder' ></i>
+                <i class='bx bx-folder'></i>
                 <span class="links-name">Listings</span>
             </a>
         </li>
         <li>
-            <a href="#">
-                <i class='bx bx-folder' ></i>
+            <a href="{% url 'network:posts' user.id %}">
+                <i class='bx bx-folder'></i>
                 <span class="links-name">Posts</span>
             </a>
         </li>
         <li>
             <a href="#">
-                <i class='bx bx-cart-alt' ></i>
+                <i class='bx bx-cart-alt'></i>
                 <span class="links-name">Order</span>
             </a>
         </li>
         <li>
-            <a href="#">
-                <i class='bx bx-heart' ></i>
+            <a href="{% url 'auction:watchlist' %}">
+                <i class='bx bx-heart'></i>
                 <span class="links-name">Saved</span>
             </a>
         </li>
         <li>
             <a href="{% url 'network:profile' user.id %}">
-                <i class='bx bx-cog' ></i>
+                <i class='bx bx-cog'></i>
                 <span class="links-name">Settings</span>
             </a>
         </li>
         <li class="profile">
-            <a href="{% url 'logout' %}"><span class="links-name profile-link">Logout</span><i class='bx bx-log-out' id="log_out" ></i></a>
+            <a href="{% url 'logout' %}"><span class="links-name profile-link">Logout</span><i
+                    style="margin-right: 4px;" class='bx bx-log-out' id="log_out"></i></a>
         </li>
     </ul>
 </div>
@@ -64,18 +67,18 @@
 <script>
     let sidebar = document.querySelector(".sidebar");
     let closeBtn = document.querySelector("#btn");
-  
-    closeBtn.addEventListener("click", ()=>{
-      sidebar.classList.toggle("open");
-      menuBtnChange();
+
+    closeBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+        menuBtnChange();
     });
-  
+
     function menuBtnChange() {
-        if(sidebar.classList.contains("open")){
+        if (sidebar.classList.contains("open")) {
             closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");
         }
         else {
-            closeBtn.classList.replace("bx-menu-alt-right","bx-menu");
+            closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");
         }
     }
-  </script>
+</script>

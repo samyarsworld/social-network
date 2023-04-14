@@ -1,0 +1,59 @@
+{% extends "authMain/layout.html" %}
+
+{% block body %}
+
+
+<div class="container rounded mt-5 mb-5" style="width: 90%;color:black;background-color: antiquewhite;">
+    <div class="row">
+        <div class="col-md-4 border-right">
+            <div class="d-flex flex-column align-items-center text-center"><img class="rounded-circle mt-5"
+                    width="150px" src="{{ profile.pic }}"><span class="font-weight-bold">{{ user.username }}</span><span
+                    class="text-black-50">{{ user.email }}</span><span></span></div>
+        </div>
+        <div class="col-md-8">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Profile Settings</h4>
+                </div>
+                <form action="{% url 'network:edit-profile' %}" method="post" style="color:grey">
+                    {% csrf_token %}
+                    <div class="row mt-2">
+                        <div class="col-md-6"><label class="labels">Name</label><input type="text" name="name"
+                                class="form-control" placeholder="first name" value="{{ profile.name }}"></div>
+                        <div class="col-md-6"><label class="labels">Surname</label><input type="text" name="last"
+                                class="form-control" placeholder="surname" value="{{ profile.last }}"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text"
+                                name="phone" class="form-control" placeholder="enter phone number"
+                                value="{{ profile.phone }}"></div>
+                        <div class="col-md-12 mt-2"><label class="labels">Email</label><input type="email" name="email"
+                                class="form-control" placeholder="enter email" value="{{ user.email }}"></div>
+                        <div class="col-md-12 mt-2"><label class="labels">Education</label><input type="text"
+                                name="education" class="form-control" placeholder="education"
+                                value="{{ profile.education }}"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6"><label class="labels">Country</label><input type="text" name="country"
+                                class="form-control" placeholder="country" value="{{ profile.country }}"></div>
+                        <div class="col-md-6"><label class="labels">Profile Image</label><input type="file" name="pic"
+                                class="form-control" placeholder="image" value="{{ profile.pic }}"></div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6"><label class="labels">Bio</label><textarea name="about"
+                                class="form-control" placeholder="about" value="{{ profile.about }}" rows="4"
+                                cols="20"></textarea>
+                        </div>
+                        <div class="mt-5 text-center">
+                            <button style="background-color: #0c9440;" role="input" class="button-53" type="submit">
+                                Save
+                            </button>
+                        </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

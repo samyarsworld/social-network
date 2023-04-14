@@ -1,14 +1,10 @@
-from django.contrib.auth import authenticate, login, logout
-from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from authMain.decorators import unauthenticated_user
 from .models import Post, Follow, Like, PostComment
-from authMain.models import User
+from authMain.models import Profile, User
 import json
 from django.http import JsonResponse
 
@@ -41,6 +37,14 @@ def post(request, post_id):
     return render(request, "network/post.html", {
         'post': post,
         'comments': comments
+    })
+
+@login_required
+def posts(request, user_id):
+    user = User.objects.get(id=user_id)
+    posts = Post.objects.filter(owner=user)
+    return render(request, "network/posts.html", {
+        'posts': posts
     })
 
 
@@ -119,6 +123,7 @@ def following(request):
 @login_required
 def profile(request, user_id):
     user = User.objects.get(id=user_id)
+    profile = Profile.objects.get(user=user)
     allPosts = Post.objects.filter(owner=user)
     pageNumber = request.GET.get('page')
     p = Paginator(allPosts, 10)
@@ -135,11 +140,41 @@ def profile(request, user_id):
         isFollowing = False
 
     return render(request, "network/profile.html", {
-        'user_profile': user,
+        'profile': profile,
         'posts': pagePosts,
         'following': following,
         'followers': followers,
         'isFollowing': isFollowing
+    })
+
+
+@login_required
+def editProfile(request):
+    if request.method == 'POST':
+        data = request.POST
+        profile = Profile.objects.get(user=request.user)
+        if data['name']:
+            profile.name = data['name']
+        if data['last']:
+            profile.last = data['last']
+        if data['country']:
+            profile.country = data['country']
+        if data['education']:
+            profile.education = data['education']
+        if data['phone']:
+            profile.phone = data['phone']
+        if data['pic']:
+            profile.pic = data['pic']
+        if data['email']:
+            profile.email = data['email']
+        if data['about']:
+            profile.about = data['about']
+        profile.save()
+        return redirect(reverse("network:profile", args=(request.user.id,)))
+
+    profile = Profile.objects.get(user=request.user)
+    return render(request, "network/edit_profile.html", {
+        'profile': profile
     })
 
 
@@ -151,7 +186,7 @@ def follow(request):
         follow = Follow(user=request.user, user_follower=userToFollow)
         follow.save()
         user_id = userToFollow.id
-        return redirect(reverse('profile', args=(user_id,)))
+        return redirect(reverse('network:profile', args=(user_id,)))
 
 
 @login_required
@@ -162,7 +197,7 @@ def unfollow(request):
         follow = Follow.objects.get(user=request.user, user_follower=userToUnfollow)
         follow.delete()
         user_id = userToUnfollow.id
-        return redirect(reverse('profile', args=(user_id,)))
+        return redirect(reverse('network:profile', args=(user_id,)))
 
 
 @login_required

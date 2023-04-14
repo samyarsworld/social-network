@@ -5,11 +5,12 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from authMain.decorators import unauthenticated_user
+from .models import User, Profile
+
+
 
 def dashboard(request):
     return render(request, 'authMain/dashboard.html')
-
-
 
 @unauthenticated_user
 def login_view(request):
@@ -31,7 +32,7 @@ def login_view(request):
     else:
         return render(request, "authMain/login.html")
 
-
+@login_required
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse("dashboard"))
@@ -41,6 +42,9 @@ def register(request):
     if request.method == "POST":
         username = request.POST["username"]
         email = request.POST["email"]
+        name = request.POST["name"]
+        last = request.POST["last"]
+
 
         # Ensure password matches confirmation
         password = request.POST["password"]
@@ -54,11 +58,14 @@ def register(request):
         try:
             user = User.objects.create_user(username, email, password)
             user.save()
+            profile = Profile(user=user, name=name, last=last)
+            profile.save()
+
         except IntegrityError:
             return render(request, "authMain/register.html", {
                 "message": "Username already taken."
             })
         login(request, user)
-        return HttpResponseRedirect(reverse("authMain:home"))
+        return HttpResponseRedirect(reverse("dashboard"))
     else:
         return render(request, "authMain/register.html")

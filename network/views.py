@@ -7,15 +7,27 @@ from .models import Post, Follow, Like, PostComment
 from authMain.models import Profile, User
 import json
 from django.http import JsonResponse
+from django.db.models import Q
+
+import os
+from dotenv import load_dotenv
+load_dotenv()
+import openai
+openai.api_key = os.getenv("OPENAI_API_KEY")
+# openai.Model.list()
+
 
 languages = ['Python', 'Java', 'Javascript', 'SQL', 'C', 'Ruby', 'HTML']
 
 def home(request):
-    allPosts = Post.objects.all()
+    allPosts = Post.objects.all().order_by('date')
     pageNumber = request.GET.get('page')
+    query = request.GET.get('search')
+    if query:
+        allPosts = allPosts.filter(Q(content__icontains=query) | Q(title__icontains=query) | Q(lang__icontains=query))
     p = Paginator(allPosts, 6)
     pagePosts = p.get_page(pageNumber)
-    
+
     try:
         allYourLikes = Like.objects.filter(liker=request.user)
         postsYouLiked = list(map(lambda x : x.post, allYourLikes))
@@ -26,7 +38,7 @@ def home(request):
         'posts': pagePosts,
         'languages': languages,
         'page-num': pageNumber,
-        'liked_posts': postsYouLiked
+        'liked_posts': postsYouLiked,
     })
 
 
@@ -42,11 +54,42 @@ def post(request, post_id):
 @login_required
 def posts(request, user_id):
     user = User.objects.get(id=user_id)
-    posts = Post.objects.filter(owner=user)
+    posts = Post.objects.filter(owner=user).order_by('date')
+
+    pageNumber = request.GET.get('page')
+    p = Paginator(posts, 6)
+    pagePosts = p.get_page(pageNumber)
+
     return render(request, "network/posts.html", {
-        'posts': posts
+        'posts': pagePosts,
+        'page-num': pageNumber,
     })
 
+@csrf_exempt
+@login_required
+def ai_generate(request):
+    if request.method == 'POST':
+        # Get user input from POST request
+        prompt = request.POST.get('prompt')
+        try:
+            # text-davinci-003
+            # Make API request to ChatGPT
+            ai_response = openai.Completion.create(
+                engine = 'gpt-3.5-turbo',
+                prompt = prompt,
+                max_tokens=100,
+                temperature=0.5,
+            )
+
+            # Get response text from API response
+            response_text = ai_response.choices[0].text
+            return JsonResponse({'response':response_text})
+        except Exception as e:
+            print(f"Error occurred: {e}")
+            return JsonResponse({'response':'Something went wrong'})
+
+        
+    
 
 @login_required
 def addComment(request):
@@ -100,7 +143,7 @@ def following(request):
 
     for each in following:
         user = each.user_follower
-        userPosts = Post.objects.filter(owner=user)
+        userPosts = Post.objects.filter(owner=user).order_by('date')
         follwingPosts.extend(userPosts)
 
     pageNumber = request.GET.get('page')
@@ -124,7 +167,7 @@ def following(request):
 def profile(request, user_id):
     user = User.objects.get(id=user_id)
     profile = Profile.objects.get(user=user)
-    allPosts = Post.objects.filter(owner=user)
+    allPosts = Post.objects.filter(owner=user).order_by('date')
     pageNumber = request.GET.get('page')
     p = Paginator(allPosts, 10)
     pagePosts = p.get_page(pageNumber)

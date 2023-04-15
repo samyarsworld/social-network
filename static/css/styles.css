@@ -1,0 +1,128 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: monaco, Consolas, Lucida Console, monospace;
+}
+
+body {
+  background-color: rgb(26, 0, 67);
+  color: white;
+}
+
+a {
+  text-decoration: none;
+}
+
+.message {
+  color: rgb(251, 133, 153);
+}
+
+.main-card {
+  margin: auto;
+  margin-top: 50px;
+  width: 18rem;
+  height: 450px;
+}
+
+.card-body {
+  color: black;
+}
+.main-card-img-top {
+  margin-top: 10px;
+  height: 250px;
+}
+
+#network-card {
+  background-color: #00b8d4;
+}
+
+#auction-card {
+  background-color: #c7006e;
+}
+
+#mail-card {
+  background-color: #00e676;
+}
+
+.card-title {
+  font-weight: bolder;
+}
+
+/* Ai section */
+#ai-container {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  padding-bottom: 20px;
+  scroll-behavior: smooth;
+}
+
+.wrapper {
+  width: 100%;
+  padding: 15px;
+}
+
+.ai {
+  background: #40414f;
+}
+
+.chat {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.profile {
+  width: 36px;
+  height: 36px;
+  border-radius: 5px;
+
+  background: #5436da;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ai .profile {
+  background: #10a37f;
+}
+
+.profile img {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+}
+
+#ai-response {
+  flex: 1;
+  color: #dcdcdc;
+  font-size: 20px;
+  max-width: 100%;
+  overflow-x: scroll;
+  white-space: pre-wrap;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

@@ -1,81 +1,114 @@
 {% extends "authMain/layout.html" %}
-
+{% load static %}
 {% block body %}
 
-  {% if user.is_authenticated %}
-  {% if message %}
-   {{ message }}
-  {% endif %}
-  <div class="row">
-      <div class="col-12 col-md-12">
-          <form action="{% url 'network:create-post' %}" method="post">
-              {% csrf_token %}
-              <input type="hidden" name="owner" value="{{ user }}">
-              <div class="form-group">
-                  <label for="content" style="margin-bottom: 10px;font-size: 20px;"><h2>Post a code snippet</h2></label>
-                  <div style="display: flex;flex-direction: column;">
-                      <input class="form-control" type="text" name="title" placeholder="title">
-                      <textarea  class="form-control" rows="3"  name="content" placeholder="Write..." style="margin-top:10px;margin-bottom: 10px;"></textarea>
-                      <div style="margin-top: 10px;display: flex;margin-bottom: 20px;justify-content: space-between;">
-                        <select class="form-select" style="width: 50%;font-size: 12px;" name="lang">
-                          <option selected disabled>Choose a language</option>
-                          {% for lang in languages %}
-                            <option class="{{ lang }}" value="{{ lang }}">{{ lang }}</option>
-                          {% endfor %}
-                        </select>
-                        <button type="submit" class="button-53" style="background-color: #a02e7e;">Post</button>
-                      </div>
-                  </div>
-              </div>
-          </form>
-      </div> 
-  </div>
-
-  {% endif %}
-  
-
-  <hr style="margin-top: 10px;margin-bottom:30px">
-
-  <div class="row">
-    <div class="col-12 col-md-6">
-        <h2>All Posts</h2>
-    </div>
-    <div class="col-12 col-md-6" style="color: black;">
-      <div class="card">
-          <div class="card-body">
-            <form style="display: flex;">
-                  <input type="text" class="form-control" placeholder="Search Codes">
-                  <button type="submit" class="button-53" style="background-color: #ff0266;width: 30%;margin-left: 10px;">Find</button>
-            </form>
+{% if user.is_authenticated %}
+{% if message %}
+{{ message }}
+{% endif %}
+<div class="row">
+  <div class="col-12 col-md-6">
+    <form action="{% url 'network:create-post' %}" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="owner" value="{{ user }}">
+      <div class="form-group">
+        <label for="content" style="margin-bottom: 10px;font-size: 20px;">
+          <h2>Post a code snippet</h2>
+        </label>
+        <div style="display: flex;flex-direction: column;">
+          <input class="form-control" type="text" name="title" placeholder="title">
+          <textarea class="form-control" rows="3" name="content" placeholder="Write..."
+            style="margin-top:10px;margin-bottom: 10px;"></textarea>
+          <div style="margin-top: 10px;display: flex;margin-bottom: 20px;justify-content: space-between;">
+            <select class="form-select" style="width: 50%;font-size: 12px;" name="lang">
+              <option selected disabled>Choose a language</option>
+              {% for lang in languages %}
+              <option class="{{ lang }}" value="{{ lang }}">{{ lang }}</option>
+              {% endfor %}
+            </select>
+            <button type="submit" class="button-53" style="background-color: #a02e7e;">Post</button>
           </div>
+        </div>
       </div>
+    </form>
   </div>
+
+  <div class="col-12 col-md-6" style="color: black;">
+    <h2 style="color: white;margin-bottom:18px">Find codes</h2>
+    <div class="card">
+      <div class="card-body">
+        <form style="display: flex;">
+          <div style="display: flex;">
+            <textarea name="search" class="form-control" id="prompt" rows="1" cols="1"
+              placeholder="Search Codes or Ask AI"></textarea>
+            <button type="submit" id="find-btn" class="button-53">Find</button>
+          </div>
+          <button id="ai-btn" class="button-53">Ask AI</button>
+
+        </form>
+
+      </div>
+    </div>
+    <br>
+    <div id="ai-container">
+      <div class="wrapper ai">
+        <div class="chat">
+          <div class="profile">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" class="bi bi-robot"
+              viewBox="0 0 16 16">
+              <path
+                d="M6 12.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5ZM3 8.062C3 6.76 4.235 5.765 5.53 5.886a26.58 26.58 0 0 0 4.94 0C11.765 5.765 13 6.76 13 8.062v1.157a.933.933 0 0 1-.765.935c-.845.147-2.34.346-4.235.346-1.895 0-3.39-.2-4.235-.346A.933.933 0 0 1 3 9.219V8.062Zm4.542-.827a.25.25 0 0 0-.217.068l-.92.9a24.767 24.767 0 0 1-1.871-.183.25.25 0 0 0-.068.495c.55.076 1.232.149 2.02.193a.25.25 0 0 0 .189-.071l.754-.736.847 1.71a.25.25 0 0 0 .404.062l.932-.97a25.286 25.286 0 0 0 1.922-.188.25.25 0 0 0-.068-.495c-.538.074-1.207.145-1.98.189a.25.25 0 0 0-.166.076l-.754.785-.842-1.7a.25.25 0 0 0-.182-.135Z" />
+              <path
+                d="M8.5 1.866a1 1 0 1 0-1 0V3h-2A4.5 4.5 0 0 0 1 7.5V8a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1v1a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-1a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1v-.5A4.5 4.5 0 0 0 10.5 3h-2V1.866ZM14 7.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7.5A3.5 3.5 0 0 1 5.5 4h5A3.5 3.5 0 0 1 14 7.5Z" />
+            </svg>
+          </div>
+          <div id="ai-response">Hi! </div>
+        </div>
+      </div>
+    </div>
+
   </div>
-  
-  <div class="row">
-    <div class="feed">
-      {% for post in posts %}
-        {% include 'network/card.html' %}
-      {% endfor %}
-    </div>  
-  </div>
-  
+
+</div>
+
+{% endif %}
 
 
-  {% if posts %}
-  <div class="row" style="margin-top: -20px;margin-bottom: 50px;">
-    <nav>
-        <ul class="pagination justify-content-center">
-            {% if posts.has_previous %}
-            <li class="page-item"><a class="page-link" style="background-color: #0f51ec;border: #0f51ec;color: white;" href="?page={{ posts.previous_page_number }}"><i class="fa fa-chevron-left"></i></a></li>
-            {% endif %}
-            <li class="page-item"><a class="page-link" style="background-color: #0f51ec;border: #0f51ec;color: white;" href="">{{ posts.number }}</a></li>
-            {% if posts.has_next %}
-            <li class="page-item"><a class="page-link" style="background-color: #0f51ec;border: #0f51ec;color: white;" href="?page={{ posts.next_page_number }}"><i class="fa fa-chevron-right"></i></a></li>
-            {% endif %}
-        </ul>
-    </nav>
+<hr style="margin-top: 10px;margin-bottom:30px">
+
+<div class="row">
+  <h3>All Posts</h3>
+</div>
+
+<div class="row">
+  <div class="feed">
+    {% for post in posts %}
+    {% include 'network/card.html' %}
+    {% endfor %}
   </div>
-  {% endif %}  
-    
+</div>
+
+
+
+{% if posts %}
+<div class="row" style="margin-top: -20px;margin-bottom: 50px;">
+  <nav>
+    <ul class="pagination justify-content-center">
+      {% if posts.has_previous %}
+      <li class="page-item"><a class="page-link" style="background-color: #0f51ec;border: #0f51ec;color: white;"
+          href="?page={{ posts.previous_page_number }}"><i class="fa fa-chevron-left"></i></a></li>
+      {% endif %}
+      <li class="page-item"><a class="page-link" style="background-color: #0f51ec;border: #0f51ec;color: white;"
+          href="">{{ posts.number }}</a></li>
+      {% if posts.has_next %}
+      <li class="page-item"><a class="page-link" style="background-color: #0f51ec;border: #0f51ec;color: white;"
+          href="?page={{ posts.next_page_number }}"><i class="fa fa-chevron-right"></i></a></li>
+      {% endif %}
+    </ul>
+  </nav>
+</div>
+{% endif %}
+
+<script src="{% static 'js/chatgpt.js' %}"></script>
+
 {% endblock %}

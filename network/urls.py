@@ -23,6 +23,7 @@ urlpatterns = [
 
 
     path("like/<int:post_id>", views.like, name="like"),
-    path("unlike/<int:post_id>", views.unlike, name="unlike")
+    path("unlike/<int:post_id>", views.unlike, name="unlike"),
 
+    path("ai", views.ai_generate, name="ai")
 ]

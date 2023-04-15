@@ -16,6 +16,7 @@
             </a>
             <div>
                 {% if post.owner == user %}
+
                 <button class="btn btn-primary btn-card" data-toggle="modal"
                     data-target="#modal_edit_{{ post.id }}">Edit</button>
                 <button class="btn btn-danger btn-card" data-toggle="modal"
@@ -23,10 +24,10 @@
                 {% else %}
                 {% if post in liked_posts %}
                 <button class="btn btn-danger btn-card" id="like-btn" onclick="unlike({{post.id}})"><i
-                        id="like-btn-icon" style="font-size: 12px;" class="fas fa-thumbs-down"></i></button>
+                        id="like-btn-icon" style="font-size: 12px;" class="fa fa-thumbs-down"></i></button>
                 {% else %}
                 <button class="btn btn-info btn-card" id="like-btn" onclick="like({{post.id}})"><i id="like-btn-icon"
-                        style="font-size: 12px;" class="fas fa-thumbs-up"></i></button>
+                        style="font-size: 12px;" class="fa fa-thumbs-up"></i></button>
                 {% endif %}
                 {% endif %}
             </div>
@@ -41,7 +42,7 @@
                 </div>
                 <div>
                     <small class="{{ post.lang }}">
-                        <i class="fa-solid fa-heart"></i> <span id="likes-num">{{ post.likes }}</span>
+                        <i class="fa fa-heart"></i> <span id="likes-num">{{ post.likes }}</span>
                     </small>
                 </div>
             </div>

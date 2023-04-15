@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,7 +39,9 @@ INSTALLED_APPS = [
     'authMain',
     'network',
     'mail',
-    'auction'
+    'auction',
+
+    'django_filters',
 ]
 
 MIDDLEWARE = [

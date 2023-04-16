@@ -122,7 +122,17 @@ a {
   font-size: 20px;
   max-width: 100%;
   overflow-x: scroll;
+  overflow-y: scroll;
   white-space: pre-wrap;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  overflow-y: hidden; /* Hide the y-axis scrollbar */
+}
+
+#ai-response::-webkit-scrollbar {
+  display: none;
+}
+
+#ai-container::-webkit-scrollbar {
+  display: none;
 }

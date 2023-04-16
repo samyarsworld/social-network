@@ -68,9 +68,13 @@ def posts(request, user_id):
 @csrf_exempt
 @login_required
 def ai_generate(request):
+
     if request.method == 'POST':
         # Get user input from POST request
-        prompt = request.POST.get('prompt')
+        request_body = json.loads(request.body)
+        prompt = request_body['prompt']
+
+
         try:
             # text-davinci-003
             # Make API request to ChatGPT
@@ -80,7 +84,7 @@ def ai_generate(request):
                 max_tokens=100,
                 temperature=0.5,
             )
-
+            
             # Get response text from API response
             response_text = ai_response.choices[0].text
             return JsonResponse({'response':response_text})

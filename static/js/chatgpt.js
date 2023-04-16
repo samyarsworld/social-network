@@ -55,29 +55,28 @@ const ai_generate = async () => {
     loader(aiResponse);
 
     try {
-    } catch (error) {}
+      const response = await fetch("ai", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          prompt: prompt,
+        }),
+      });
 
-    const response = await fetch("ai", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        prompt: prompt,
-      }),
-    });
+      clearInterval(loadInterval);
+      aiResponse.innerHTML = "";
 
-    clearInterval(loadInterval);
-    aiResponse.innerHTML = "";
-
-    if (response.ok) {
-      const data = await response.json();
-      // const parsedData = data.bot.trim();
-      const parsedData = data;
-      type(aiResponse, parsedData.response);
-    } else {
-      const err = await response.text();
-      aiResponse.innerHTML = "Something went wrong, please try again.";
+      if (response.ok) {
+        const data = await response.json();
+        // const parsedData = data.bot.trim();
+        type(aiResponse, data.response);
+      } else {
+        aiResponse.innerHTML = "Something went wrong, please try again.";
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 };

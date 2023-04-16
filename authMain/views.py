@@ -6,6 +6,8 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from authMain.decorators import unauthenticated_user
 from .models import User, Profile
+from django.contrib import messages
+import re
 
 
 
@@ -19,6 +21,7 @@ def login_view(request):
         # Attempt to sign user in
         username = request.POST["username"]
         password = request.POST["password"]
+
         user = authenticate(request, username=username, password=password)
 
         # Check if authentication successful
@@ -45,14 +48,17 @@ def register(request):
         name = request.POST["name"]
         last = request.POST["last"]
 
-
         # Ensure password matches confirmation
         password = request.POST["password"]
         confirmation = request.POST["confirmation"]
         if password != confirmation:
             return render(request, "authMain/register.html", {
                 "message": "Passwords must match."
-            })
+            })    
+
+        # Ensure password criteria is met    
+        if len(password) < 8 or not re.search(r'\d', password) or not re.search(r'[a-zA-Z]', password):
+            return render(request, 'authMain/register.html', {"message: 'Password must be at least 8 characters long and contain at least one digit and one letter'"})
 
         # Attempt to create new user
         try:

@@ -10,6 +10,9 @@
 
 <h2>Active Listings</h2>
 <br>
+<button type="button" class="button-53"
+    style="background-color: #403de7;width: 150px;display: inline-block;margin-bottom: 20px;">Create
+    listing</button>
 <form action="{% url 'auction:category' %}" method="post">
     {% csrf_token %}
     <label for="category">Choose a listing category:</label>
@@ -23,19 +26,24 @@
         </option>
         {% endfor %}
     </select>
-    <input class="btn btn-warning" type="submit" value="Go">
+    <button type="submit" class="button-53" style="background-color: #d9e73d;display: inline-block;">Go</button>
+
 </form>
+
 
 <br><br>
 
 <div class="row mx-3 justify-content-center">
     {% for listing in listings %}
     <div class="card mr-2 mb-4" style="width: 18rem;">
-        <img class="card-img-top" src="{% static listing.image %}" alt="{{ listing.name }}">
+        <img class="card-img-top" style="margin-top: 10px;" src="{{listing.image_url}}" alt="{{ listing.name }}">
         <div class="card-body">
             <h5 class="card-title">{{ listing.name }}</h5>
             <p class="card-text">{{ listing.description | slice:":100" }} ...</p>
-            <a href="{% url 'auction:listing' listing.id %}" class="btn btn-primary stretched-link">Details</a>
+
+
+            <a href="{% url 'auction:listing' listing.id %}"><button type="button" class="button-53"
+                    style="background-color: #3de784;">Details</button></a>
         </div>
     </div>
     {% empty %}

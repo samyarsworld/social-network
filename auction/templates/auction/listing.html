@@ -30,25 +30,30 @@
     <form class="ml-3 mr-2" action="{% url 'auction:remove-watchlist' %}" method="post">
         {% csrf_token %}
         <input type="hidden" name="listing_id" value="{{ listing.id }}">
-        <input class="btn btn-danger" type="submit" value="Remove from watchlist">
+        <button type="submit" class="button-53" style="background-color: #dd392a;width: 200px;">Remove from
+            watchlist</button>
+
     </form>
     {% else %}
     <form class="ml-3 mr-2" action="{% url 'auction:add-watchlist' %}" method="post">
         {% csrf_token %}
         <input type="hidden" name="listing_id" value="{{ listing.id }}">
-        <input class="btn btn-success" type="submit" value="Add to watchlist">
+        <button type="submit" class="button-53" style="background-color: rgb(27, 191, 73);width: 200px;">Add to
+            watchlist</button>
+
     </form>
     {% endif %}
     {% if user == listing.owner %}
 
     <form class="mr-2" action="{% url 'auction:remove-listing' listing.id %}" method="post">
         {% csrf_token %}
-        <input class="btn btn-danger" type="submit" value="Remove listing">
+        <button type="submit" class="button-53" style="background-color: #dd392a;width: 150px;">Remove listing</button>
+
     </form>
-    {% if listing.price.bid > 1000 %}
+    {% if listing.price.bid > 1 %}
     <form action="{% url 'auction:sell-listing' listing.id %}" method="post">
         {% csrf_token %}
-        <input class="btn btn-info" type="submit" value="Sell listing">
+        <button type="submit" class="button-53" style="background-color: #3de745;width: 150px;">Sell listing</button>
     </form>
     {% endif %}
     {% endif %}
@@ -58,7 +63,7 @@
 
 <br>
 
-<img style="width: 400px;" src="{% static listing.image %}" alt="{{ listing.name }}">
+<img style="width: 400px;" src="{{listing.image_url }}" alt="{{ listing.name }}">
 <hr>
 <h2>Description:</h2>
 <p>{{ listing.description }}</p>
@@ -74,12 +79,13 @@
 
 {% if user.is_authenticated %}
 {% if listing.is_active and user != listing.owner %}
-<h4><span class="badge badge-warning">Place bid:</span></h4>
+<p style="font-size:16px;font-weight: 400;margin-bottom: 0px;">Place bid:</p>
 <form action="{% url 'auction:add-bid' %}" method="post">
     {% csrf_token %}
     <input min="0" type="number" name="bid">
     <input type="hidden" name="listing_id" value="{{ listing.id }}">
-    <input class="btn btn-success" type="submit" value="Bid!">
+    <button type="submit" class="button-53" style="background-color: #9722af;margin-top: 10px;">Bid!</button>
+
 </form>
 
 
@@ -100,11 +106,12 @@
     <div class="col">
         <form action="{% url 'auction:add-comment' %}" method="post">
             {% csrf_token %}
-            <label for="comment"><span style="font-size: 16px ;" class="badge badge-info">Place a
+            <label for="comment"><span style="font-size: 16px ;">Place a
                     comment:</span></label>
             <input style="width:50%" type="text" name="comment">
             <input type="hidden" name="listing_id" value="{{ listing.id }}">
-            <input class="btn btn-primary" type="submit" value="Add">
+            <button type="submit" class="button-53" style="background-color: #19dbd8;margin-top: 10px;">Add</button>
+
         </form>
     </div>
 </div>

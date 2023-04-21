@@ -17,11 +17,12 @@
 <div class="row mx-3">
     {% for watchlist in watchlists %}
     <div class="card mr-2 mb-4" style="width: 18rem;">
-        <img class="card-img-top" src="{% static watchlist.image %}" alt="{{ watchlist.name }}">
+        <img class="card-img-top" src="{% static watchlist.image_url %}" alt="{{ watchlist.name }}">
         <div class="card-body">
             <h5 class="card-title">{{ watchlist.name }}</h5>
             <p class="card-text">{{ watchlist.description }}</p>
-            <a href="{% url 'auction:listing' watchlist.id %}" class="btn btn-primary">Details</a>
+            <a href="{% url 'auction:listing' watchlist.id %}"><button type="button" class="button-53"
+                    style="background-color: #3de784;">Details</button></a>
         </div>
     </div>
     {% empty %}

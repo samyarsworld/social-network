@@ -58,7 +58,7 @@ def register(request):
 
         # Ensure password criteria is met    
         if len(password) < 8 or not re.search(r'\d', password) or not re.search(r'[a-zA-Z]', password):
-            return render(request, 'authMain/register.html', {"message: 'Password must be at least 8 characters long and contain at least one digit and one letter'"})
+            return render(request, 'authMain/register.html', {"message": 'Password must be at least 8 characters long and contain at least one digit and one letter'})
 
         # Attempt to create new user
         try:

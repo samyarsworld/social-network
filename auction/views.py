@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 
 from .models import ListingComment, Listing, Bid, Category
 from .forms import CreateListingForm
+import os
+import boto3
 
 
 def home(request):
@@ -17,18 +19,36 @@ def home(request):
 @login_required
 def createListing(request):
     if request.method == 'POST':
-        form = CreateListingForm(request.POST)
-        listing = form.save(commit=False)
-        listing.owner = request.user
-        
-        bid = Bid(bid=1000.0, bid_owner=request.user)
-        bid.save()
-        listing.price = bid
+        form = CreateListingForm(request.POST , request.FILES)
 
-        listing.save()
+        if form.is_valid():
 
-        return redirect(reverse('auction:home'))
-        
+            listing = form.save(commit=False)
+            listing.owner = request.user
+            price = form.cleaned_data['price'] or 1
+            bid = Bid(bid=price, bid_owner=request.user)
+            bid.save()
+            listing.bid_price = bid
+
+            if request.FILES['image']:
+                print('3')
+                image_file = request.FILES['image']
+                # Connect to S3
+                s3 = boto3.client('s3')
+                # Upload the image file to S3
+                s3.upload_fileobj(image_file, os.getenv('AWS_STORAGE_BUCKET_NAME'), 'static/auction_images/' + image_file.name)
+            
+                # Get the URL of the uploaded image
+                url = f"https://s3.amazonaws.com/{os.getenv('AWS_STORAGE_BUCKET_NAME')}/{'static/auction_images/' + image_file.name}"
+                print(url)
+                listing.image_url = url
+
+            listing.save()
+
+            return redirect(reverse('auction:home'))
+        else:
+            print(form.errors)
+    
     form = CreateListingForm()
     return render(request, 'auction/createListing.html', {
         'form': form
@@ -106,7 +126,7 @@ def addBid(request):
         id = request.POST['listing_id']
         listing = Listing.objects.get(id=id)
         bid = float(request.POST['bid'])
-        current_bid = listing.price.bid
+        current_bid = listing.bid_price.bid
         comments = ListingComment.objects.filter(listing=listing)
         if listing in request.user.user_watchlists.all():
             watchlist = True
@@ -116,7 +136,7 @@ def addBid(request):
         if bid > current_bid:
             newBid = Bid(bid=bid, bid_owner=request.user)
             newBid.save()
-            listing.price = newBid
+            listing.bid_price = newBid
             listing.save()
             
             return render(request, 'auction/listing.html', {
@@ -147,12 +167,12 @@ def sellListing(request, listing_id):
         listing = Listing.objects.get(id=listing_id)
         listing.is_active = False
         listing.save()
-        buyer = listing.price.bid_owner
+        buyer = listing.bid_price.bid_owner
         comments = ListingComment.objects.filter(listing=listing)
 
 
         return render(request, 'auction/listing.html', {
             'listing': listing,
             'comments': comments,
-            'message': f'Sold to {buyer} for ${listing.price.bid}'
+            'message': f'Sold to {buyer} for ${listing.bid_price.bid}'
         })

@@ -32,7 +32,7 @@
 <div class="row mx-3 justify-content-center">
     {% for listing in listings %}
     <div class="card mr-2 mb-4" style="width: 18rem;">
-        <img class="card-img-top" src="{% static listing.image %}" alt="{{ listing.name }}">
+        <img class="card-img-top" src="{% static listing.image_url %}" alt="{{ listing.name }}">
         <div class="card-body">
             <h5 class="card-title">{{ listing.name }}</h5>
             <p class="card-text">{{ listing.description | slice:":100" }}</p>

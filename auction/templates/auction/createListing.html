@@ -1,22 +1,52 @@
-{% extends "authMain/layout.html" %}
+{% extends "authMain/layout.html" %}>
 
 {% block body %}
-    <style>
-        body {
-            background-color: #cd87cb;
-            color: black;
-        }
-    </style>
-    
-    <h2>Create New Listing</h2>
+<style>
+    body {
+        background-color: #cd87cb;
+        color: black;
+    }
 
+    /* MyForm theme */
+
+    /* Center the form on the page */
+    form.my-form {
+        max-width: 500px;
+    }
+
+    /* Style the form fields */
+    .my-form p {
+        margin: 10px 0;
+    }
+
+    .my-form input,
+    .my-form textarea {
+        width: 100%;
+        border-radius: 4px;
+        margin-bottom: 10px;
+        border: none;
+    }
+</style>
+
+<h2>Create New Listing</h2>
+
+<br>
+
+<form class="my-form" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.name.label_tag }} {{ form.name }}
+    {{ form.description.label_tag }} {{ form.description }}
+    {{ form.category.label_tag }}
     <br>
+    {{ form.category }}
+    <br>
+    <div style="height: 10px;"></div>
+    {{ form.price.label_tag }} {{ form.price }}
+    {{ form.image.label_tag }} {{ form.image }}
 
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="hidden" name="owner" value="{{ user }}">
-        <input class="btn btn-primary" type="submit" value="Save Listing">
-    </form>
+    <input type="hidden" name="owner" value="{{ user }}">
+    <button type="submit" class="button-53" style="background-color: #a02e7e;margin-top: 10px;">Post</button>
+
+</form>
 
 {% endblock %}

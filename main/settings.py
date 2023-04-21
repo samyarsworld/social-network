@@ -31,7 +31,11 @@ RDS_HOST = os.getenv("RDS_HOST")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+<<<<<<< HEAD
 ALLOWED_HOSTS = ['https://galactus.onrender.com', '127.0.0.1']
+=======
+ALLOWED_HOSTS = ['galactus.onrender.com', '127.0.0.1']
+>>>>>>> 056baee1684062d184784658da71c5b5478340a8
 
 # Application definition
 

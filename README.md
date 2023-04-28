@@ -10,6 +10,25 @@ Galactic Social Network is a social networking platform that allows users to con
 
 The platform also has authentication features, and users can update their profile information and settings once signed up. Amazon S3 is used for file storage, while Amazon RDS in conjunction with PostgreSQL is used to store data in the cloud. Django and Python are used for the front-end and back-end frameworks.
 
+<a name="demo"></a>
+## Demo
+| Authentication Page  |
+|:----------------------|
+|<img src="https://drive.google.com/uc?export=view&id=1mNkU_kPftiDHwoH6WJqsulc4mz7NWUBu" width="700" height="100%"/> |
+
+| Main Chat Desktop View |
+|:----------------------|
+<img src="https://drive.google.com/uc?export=view&id=1-QtIt1Bsb4WhgOXa9ATvRelik_WMAO0d" width="700" height="100%"/> |
+
+
+
+
+| Main Chat Mobile View Contacts  | &nbsp;&nbsp;&nbsp; |  Main Chat Mobile View Chat  |
+|:--------:|:-------------:|:--------:|
+|<img src="https://drive.google.com/uc?export=view&id=1-dIbadCR_qVwcq-nw0t0WhULuGN1t3a5" style="margin-right: 10px" width="500" height="100%"/> | &nbsp;&nbsp;&nbsp; | <img src="https://drive.google.com/uc?export=view&id=1uCXv37W7XtssM-y5RsmXpsv-VnbMzxmR" width="500" height="100%"/> |
+
+
+
 ## Installation
 
 To install Galactic Social Network, you need to:

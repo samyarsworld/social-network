@@ -93,7 +93,7 @@ DATABASES = {
         'USER' : RDS_USER,
         'PASSWORD': RDS_PASSWORD,
         'HOST': RDS_HOST,
-        'PORT': '5432'
+        'PORT': '5432',
     }
 }
 

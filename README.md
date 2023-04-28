@@ -14,7 +14,7 @@ The platform also has authentication features, and users can update their profil
 ## Demo
 | Authentication Page  |
 |:----------------------|
-|<img src="https://drive.google.com/uc?export=view&id=1mNkU_kPftiDHwoH6WJqsulc4mz7NWUBu" width="700" height="100%"/> |
+|<img src="https://drive.google.com/uc?export=view&id=1mNkU_kPftiDHwoH6WJqsulc4mz7NWUBu" width="100%" height="100%"/> |
 
 | Main Chat Desktop View |
 |:----------------------|

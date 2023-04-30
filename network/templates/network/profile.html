@@ -5,7 +5,7 @@
 <br>
 <div class="row">
     <div class="col-12">
-        <h1>{{ user.username | title }}'s Profile</h1>
+        <h1>{{ profile.user.username | title }}'s Profile</h1>
     </div>
 </div>
 
@@ -20,29 +20,31 @@
             <p class="col-4 col-md-12 col-lg-4" style="font-size: 20px;">Following: {{ following.count }}</p>
 
             {% if user.is_authenticated %}
-            {% if user != user %}
+            {% if profile.user != user %}
             {% if isFollowing %}
             <form class="col-4 col-md-12 col-lg-4" action="{% url 'network:unfollow' %}" method="post">
                 {% csrf_token %}
-                <input type="hidden" name="userfollow" value="{{ user }}">
-                <input type="submit" class="btn btn-danger" value="Unfollow">
+                <input type="hidden" name="userfollow" value="{{ profile.user }}">
+                <button style="background-color: #9d4a20;width: 80px;" role="input" class="button-53"
+                    type="submit">Unfollow </button>
             </form>
             {% else %}
-            <form action="{% url 'network:follow' %}" method="post">
+            <form class="col-4 col-md-12 col-lg-4" action="{% url 'network:follow' %}" method="post">
                 {% csrf_token %}
-                <input type="hidden" name="userfollow" value="{{ user }}">
-                <input type="submit" class="btn btn-success" value="Follow">
+                <input type="hidden" name="userfollow" value="{{ profile.user }}">
+                <button style="background-color: #439d20;width: 80px;" role="input" class="button-53"
+                    type="submit">Follow </button>
             </form>
             {% endif %}
             {% endif %}
             {% endif %}
         </div>
 
-        <div class="row justify-content-between">
+        <div class="row justify-content-between" style="margin-top: 10px;">
             <p class="col-4 col-md-12 col-lg-4" style="font-size: 20px;">
                 <a class="col-4 col-md-12 col-lg-4" href="{% url 'network:posts' profile.user.id %}">
                     <button style="background-color: #9d205f;width: 120px;" role="input" class="button-53"
-                        type="submit">Posts:{{posts.count}}
+                        type="submit">Posts:{{profile.user.posts.count}}
                     </button>
                 </a>
             </p>
@@ -66,8 +68,8 @@
                         <span class="ml-2"><i class="fa fa-copy"></i></span>
                     </div>
                     <div class="d-flex flex-row justify-content-center align-items-center mt-3">
-                        <span class="number">{{ profile.user.user_who_is_following.count }} <span
-                                class="follow">Friends</span></span>
+                        <span class="number">{{ profile.user.user_who_is_being_followed.count }} <span
+                                class="follow">Friend{{profile.user.user_who_is_being_followed|pluralize}}</span></span>
                     </div>
                     {% if user == profile.user %}
                     <div class=" d-flex mt-2">

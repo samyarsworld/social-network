@@ -2,19 +2,17 @@
 {% load static %}
 {% block body %}
 
-{% if user.is_authenicated %}
-<div class="row">
+{% if user.is_authenticated %}
+<div class="row" style="margin-bottom: -30px;">
     <div class="col-12">
-        <h4>Hello {{ user.username }}</h4>
+        <h4>Hello {{ user.username|title }}</h4>
         <p>
-            Name
-            Occupation
-            Date joined
+            Joined: {{ user.date_joined }}
         </p>
         <p>
-            Followers
-            Following
-            Posts
+            <span>Followers: {{ user.user_who_is_following.count }}</span>
+            <span style="margin-left: 20px;">Following: {{ user.user_who_is_being_followed.count }}</span>
+            <span style="margin-left: 20px;">Posts: {{ user.posts.count}}</span>
         </p>
 
     </div>

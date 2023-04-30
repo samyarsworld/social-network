@@ -46,10 +46,27 @@ def home(request):
 def post(request, post_id):
     post = Post.objects.get(id=post_id)
     comments = PostComment.objects.filter(post=post)
+    user = post.owner
+    profile = Profile.objects.get(user=user)
+
+    followers = Follow.objects.filter(user_follower=user)
+
+    try:
+        checkFollow = followers.filter(user=request.user)
+        if len(checkFollow): isFollowing = True
+        else: isFollowing = False
+    except:
+        isFollowing = False
+
+
     return render(request, "network/post.html", {
         'post': post,
-        'comments': comments
+        'comments': comments,
+        'profile': profile,
+        'isFollowing': isFollowing
     })
+
+    
 
 @login_required
 def posts(request, user_id):

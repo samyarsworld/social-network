@@ -12,7 +12,10 @@ import re
 
 
 def dashboard(request):
-    return render(request, 'authMain/dashboard.html')
+    profile = None
+    if request.user:
+        profile = Profile.objects.get(user=request.user)
+    return render(request, 'authMain/dashboard.html', {'user_profile':profile})
 
 @unauthenticated_user
 def login_view(request):

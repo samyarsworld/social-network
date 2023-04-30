@@ -40,7 +40,6 @@ def createListing(request):
             
                 # Get the URL of the uploaded image
                 url = f"https://s3.amazonaws.com/{os.getenv('AWS_STORAGE_BUCKET_NAME')}/{'static/auction_images/' + image_file.name}"
-                print(url)
                 listing.image_url = url
 
             listing.save()

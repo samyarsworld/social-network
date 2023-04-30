@@ -19,7 +19,7 @@
         {% csrf_token %}
         <input type="hidden" name="post_id" value="{{ post.id }}">
         <button type="submit" class="button-53"
-            style="background-color: #866416;width: 130px;padding: 0;padding-top: 10px;">Remove
+            style="background-color: #866416;width: 130px;padding: 0;padding-top: 10px;">Remove from
             watchlist</button>
 
     </form>
@@ -28,9 +28,25 @@
         {% csrf_token %}
         <input type="hidden" name="post_id" value="{{ post.id }}">
         <button type="submit" class="button-53"
-            style="background-color: #16862e;width: 130px;padding: 0;padding-top: 10px;">Add
+            style="background-color: #16862e;width: 130px;padding: 0;padding-top: 10px;">Add to
             watchlist</button>
 
+    </form>
+    {% endif %}
+    {% if isFollowing %}
+    <form class="col-4 col-md-12 col-lg-4" action="{% url 'network:unfollow' %}" method="post"
+        style="margin-left: 10px;">
+        {% csrf_token %}
+        <input type="hidden" name="userfollow" value="{{ profile.user }}">
+        <button style="background-color: #9d4a20;width: 80px;" role="input" class="button-53" type="submit">Unfollow
+        </button>
+    </form>
+    {% else %}
+    <form class="col-4 col-md-12 col-lg-4" action="{% url 'network:follow' %}" method="post" style="margin-left: 10px;">
+        {% csrf_token %}
+        <input type="hidden" name="userfollow" value="{{ profile.user }}">
+        <button style="background-color: #439d20;width: 80px;" role="input" class="button-53" type="submit">Follow
+        </button>
     </form>
     {% endif %}
     {% else %}
@@ -46,9 +62,13 @@
 <br>
 
 <h2>Description:</h2>
-<p>{{ post.content }}</p>
+<p>
+<pre>
+    {{ post.content }}
+</pre>
+</p>
 <hr>
-<p>Post owner: {{ post.owner | title }}</p>
+<p>Post owner: <a href="{% url 'network:profile' post.owner.id %}">{{ post.owner | title }}</a> </p>
 <p><i class="fa fa-heart"></i> likes: {{ post.likes }}</p>
 
 <hr>

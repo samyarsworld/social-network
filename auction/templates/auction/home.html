@@ -10,9 +10,9 @@
 
 <h2>Active Listings</h2>
 <br>
-<button type="button" class="button-53"
-    style="background-color: #403de7;width: 150px;display: inline-block;margin-bottom: 20px;">Create
-    listing</button>
+<a href="{% url 'auction:create-listing' %}"><button type="button" class="button-53"
+        style="background-color: #403de7;width: 150px;display: inline-block;margin-bottom: 20px;">Create
+        listing</button></a>
 <form action="{% url 'auction:category' %}" method="post">
     {% csrf_token %}
     <label for="category">Choose a listing category:</label>

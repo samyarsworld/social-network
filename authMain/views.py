@@ -13,7 +13,7 @@ import re
 
 def dashboard(request):
     profile = None
-    if request.user:
+    if request.user.is_authenticated:
         profile = Profile.objects.get(user=request.user)
     return render(request, 'authMain/dashboard.html', {'user_profile':profile})
 

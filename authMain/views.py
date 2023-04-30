@@ -6,7 +6,6 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from authMain.decorators import unauthenticated_user
 from .models import User, Profile
-from django.contrib import messages
 import re
 
 

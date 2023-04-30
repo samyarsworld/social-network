@@ -10,12 +10,13 @@
 
 
 <h2>Details for {{ listing }}</h2>
-<h4>Listing price: ${{ listing.price.bid }}</h4>
+<h4>Listing price: ${{ listing.bid_price.bid }}</h4>
 <hr>
 <div class="row">
 
-    {% if user.is_authenticated and listing.is_active == False and user == listing.price.bid_owner%}
-    <div class="alert alert-success ml-3" role="alert">Congratulations! You bought this listing for {{ listing.price.bid
+    {% if user.is_authenticated and listing.is_active == False and user == listing.bid_price.bid_owner%}
+    <div class="alert alert-success ml-3" role="alert">Congratulations! You bought this listing for {{
+        listing.bid_price.bid
         }}.</div>
     {% endif %}
 
@@ -27,18 +28,18 @@
 
     {% if user.is_authenticated and listing.is_active %}
     {% if watchlist %}
-    <form class="ml-3 mr-2" action="{% url 'auction:remove-watchlist' %}" method="post">
+    <form class="ml-3 mr-2" action="{% url 'auction:remove-watchlist' %}" method="post" style="margin-bottom: 10px;">
         {% csrf_token %}
         <input type="hidden" name="listing_id" value="{{ listing.id }}">
-        <button type="submit" class="button-53" style="background-color: #dd392a;width: 200px;">Remove from
+        <button type="submit" class="button-53" style="background-color: #dd392a;width: 220px;">Remove from
             watchlist</button>
 
     </form>
     {% else %}
-    <form class="ml-3 mr-2" action="{% url 'auction:add-watchlist' %}" method="post">
+    <form class="ml-3 mr-2" action="{% url 'auction:add-watchlist' %}" method="post" style="margin-bottom: 10px;">
         {% csrf_token %}
         <input type="hidden" name="listing_id" value="{{ listing.id }}">
-        <button type="submit" class="button-53" style="background-color: rgb(27, 191, 73);width: 200px;">Add to
+        <button type="submit" class="button-53" style="background-color: rgb(27, 191, 73);width: 170px;">Add to
             watchlist</button>
 
     </form>
@@ -47,13 +48,13 @@
 
     <form class="mr-2" action="{% url 'auction:remove-listing' listing.id %}" method="post">
         {% csrf_token %}
-        <button type="submit" class="button-53" style="background-color: #dd392a;width: 150px;">Remove listing</button>
+        <button type="submit" class="button-53" style="background-color: #dd392a;width: 160px;">Remove listing</button>
 
     </form>
-    {% if listing.price.bid > 1 %}
-    <form action="{% url 'auction:sell-listing' listing.id %}" method="post">
+    {% if listing.bid_price.bid > 1 %}
+    <form action="{% url 'auction:sell-listing' listing.id %}" method="post" style="margin-top: 10px;">
         {% csrf_token %}
-        <button type="submit" class="button-53" style="background-color: #3de745;width: 150px;">Sell listing</button>
+        <button type="submit" class="button-53" style="background-color: #750d88;width: 150px;">Sell listing</button>
     </form>
     {% endif %}
     {% endif %}

@@ -29,7 +29,7 @@ RDS_PASSWORD = os.getenv("RDS_PASSWORD")
 RDS_HOST = os.getenv("RDS_HOST")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['galactus.onrender.com', '127.0.0.1']

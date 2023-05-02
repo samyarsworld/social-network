@@ -3,7 +3,8 @@
 ## Index
 1. [About](#about)
 2. [Demo](#demo)
-3. [Usage](#usage)
+3. [Technologies](#tech)
+4. [Usage](#usage)
     * [Installation](#installation)
     * [In the Webapp](#webapp)
 5. [Developer Features](#dev)
@@ -37,17 +38,20 @@ The platform also has authentication features, and users can update their profil
 <img src="https://drive.google.com/uc?export=view&id=1-QtIt1Bsb4WhgOXa9ATvRelik_WMAO0d" width="100%" height="100%"/> |
 
 
-
-
 | Main Chat Mobile View Contacts  | &nbsp;&nbsp;&nbsp; |  Main Chat Mobile View Chat  |
 |:--------:|:-------------:|:--------:|
 |<img src="https://drive.google.com/uc?export=view&id=1-dIbadCR_qVwcq-nw0t0WhULuGN1t3a5" style="margin-right: 10px" width="500" height="100%"/> | &nbsp;&nbsp;&nbsp; | <img src="https://drive.google.com/uc?export=view&id=1uCXv37W7XtssM-y5RsmXpsv-VnbMzxmR" width="500" height="100%"/> |
 
 
-<a name="usage"></a>
-## Usage
+<a name="tech"></a>
+## Technologies
 
-To use the application, head to https://galactus.onrender.com/ and signup. Welcome to the Galactus Network. To use it locally follow the next section.
+
+
+<a name="usage"></a>
+### Usage
+
+To use the application, head to https://galactus.onrender.com/ and signup. To use it locally follow the next section.
 
 <a name="installation"></a>
 ### Installation
@@ -96,7 +100,7 @@ Galactic Social Network offers a range of features, including:
 
 - SAMYAR FARJAM (https://github.com/samyarsworld)
 
-If you'd like to contribute to Galactic Social Network, please feel free to submit a pull request or open an issue on our [GitHub repository](https://github.com/username/repo). We welcome all contributions and feedback.
+If you'd like to contribute to Galactic Social Network, please feel free to submit a pull request or open an issue on our [GitHub repository](https://github.com/samyarsworld/social-network). We welcome all contributions and feedback.
 
 <a name="license"></a>
 ## License

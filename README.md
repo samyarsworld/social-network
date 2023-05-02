@@ -1,12 +1,27 @@
 # Galactic Social Network
 
-Galactic Social Network is a social networking platform that allows users to connect, share, and learn from each other. This platform consists of three major apps that mimic the functionalities of Facebook. The three major apps include:
+## Index
+1. [About](#about)
+2. [Demo](#demo)
+3. [Usage](#usage)
+    * [Installation](#installation)
+    * [Game Controls](#controls)
+    * [Commands](#commands)
+4. [Future Improvements](#future)
+    * [Efficiency and AI Power](#power)
+    * [Gameplay](#gameplay)
+6. [Credits](#credits) 
+7. [License](#license)
 
-1. Social network section: This section allows users to create profiles, follow each other, and share code snippets with the community. The search engine helps users find code snippets they are looking for, and the AI-powered chatbot, ChatGPT from OpenAI, can assist users in finding what they need. Users can like or dislike posts and have the ability to create, edit, or remove their own posts.
+<a name="about"></a>
+## About
+Galactic Social Network is a social networking platform that allows users to connect, share, and learn from each other. Additional, users can communicate, as well as, buy listings in auctions. This platform consists of three major apps that are:
 
-2. Email sending section: This section provides users with an inbox, sent box, and archive, and they can compose and send emails to other users.
+1. **Social Network**: This section allows users to create profiles, follow each other, and share code snippets with the community. The search engine helps users find code snippets they are looking for, and the AI-powered chatbot, ChatGPT from OpenAI, can assist users in finding what they need. Users can like or dislike posts and have the ability to create, edit, or remove their own posts.
 
-3. Auction app: In this section, users can list their galactic equipment, such as spaceships and clothing, and other users can bid on the items. Each listing has a detailed description, and users can bid, add items to their watchlist, or comment on listings. Users can also end bids or remove their listings as they see fit.
+2. **Email sending**: This section provides users with an inbox, sent box, and archive, and they can compose and send emails to other users.
+
+3. **Auction**: In this section, users can list their galactic equipment, such as spaceships and clothing, and other users can bid on the items. Each listing has a detailed description, and users can bid, add items to their watchlist, or comment on listings. Users can also end bids or remove their listings as they see fit.
 
 The platform also has authentication features, and users can update their profile information and settings once signed up. Amazon S3 is used for file storage, while Amazon RDS in conjunction with PostgreSQL is used to store data in the cloud. Django and Python are used for the front-end and back-end frameworks.
 

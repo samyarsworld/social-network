@@ -7,11 +7,13 @@
     * [Installation](#installation)
     * [Game Controls](#controls)
     * [Commands](#commands)
-4. [Future Improvements](#future)
+5. [Developer Features](#dev)
+6. [Future Improvements](#future)
     * [Efficiency and AI Power](#power)
     * [Gameplay](#gameplay)
-6. [Credits](#credits) 
-7. [License](#license)
+7. [Credits](#credits) 
+8. [License](#license)
+ 
 
 <a name="about"></a>
 ## About

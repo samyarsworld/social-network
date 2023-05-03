@@ -35,7 +35,7 @@ The platform also has authentication features, and users can update their profil
 
 | Home View |
 |:----------------------|
-<img src="https://drive.google.com/uc?export=view&id=1dmkGKMCtF6_sYlMLVYuTtgzITPmeqcrG" width="100%" height="60%"/> |
+<img src="https://drive.google.com/uc?export=view&id=1dmkGKMCtF6_sYlMLVYuTtgzITPmeqcrG" width="60%" height="60%"/> |
 
 | Main Chat Mobile View Contacts  | &nbsp;&nbsp;&nbsp; |  Main Chat Mobile View Chat  |
 |:--------:|:-------------:|:--------:|

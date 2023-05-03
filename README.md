@@ -35,11 +35,26 @@ The platform also has authentication features, and users can update their profil
 
 | Home View |
 |:----------------------|
-<img src="https://drive.google.com/uc?export=view&id=1dmkGKMCtF6_sYlMLVYuTtgzITPmeqcrG" width="60%" height="60%"/> |
+<img src="https://drive.google.com/uc?export=view&id=1dmkGKMCtF6_sYlMLVYuTtgzITPmeqcrG" width="100%" height="100%"/> |
+
+
+| Social Media App View |
+|:----------------------|
+<img src="https://drive.google.com/uc?export=view&id=1c9bgW5ht8ySEVeiWLdAarw6AT8m5TiLz" width="100%" height="100%"/> |
+
+
+| Mailing App View |
+|:----------------------|
+<img src="https://drive.google.com/uc?export=view&id=1H6kDwJ8r7ORiyBNytJ0Ng4DiX-GQhds0" width="100%" height="100%"/> |
+
+| Auction App Home View |
+|:----------------------|
+<img src="https://drive.google.com/uc?export=view&id=1uhXgn3gliAxAx1tiu0J-IN6AsidBB83v" width="100%" height="100%"/> |
+
 
 | Main Chat Mobile View Contacts  | &nbsp;&nbsp;&nbsp; |  Main Chat Mobile View Chat  |
 |:--------:|:-------------:|:--------:|
-|<img src="https://drive.google.com/uc?export=view&id=1-dIbadCR_qVwcq-nw0t0WhULuGN1t3a5" style="margin-right: 10px" width="500" height="100%"/> | &nbsp;&nbsp;&nbsp; | <img src="https://drive.google.com/uc?export=view&id=1uCXv37W7XtssM-y5RsmXpsv-VnbMzxmR" width="500" height="100%"/> |
+|<img src="https://drive.google.com/uc?export=view&id=1X1ANmepXFyc9hFlXqCppKMVN4Uo3nc53" style="margin-right: 10px" width="500" height="100%"/> | &nbsp;&nbsp;&nbsp; | <img src="https://drive.google.com/uc?export=view&id=1AnUtIUpzITkHFKChzmSXZJLyWf0bq6xH" width="500" height="100%"/> |
 
 
 <a name="tech"></a>

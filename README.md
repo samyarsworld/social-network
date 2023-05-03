@@ -4,15 +4,14 @@
 1. [About](#about)
 2. [Demo](#demo)
 3. [Technologies](#tech)
-4. [Usage](#usage)
-    * [Installation](#installation)
-    * [In the Webapp](#webapp)
-5. [Developer Features](#dev)
-6. [Future Improvements](#future)
+4. [Usage and Installation](#installation)
+5. [In the Webapp](#usage)
+6. [Developer Features](#dev)
+7. [Future Improvements](#future)
     * [Frontend](#front)
     * [Backend](#back)
-7. [Credits](#credits) 
-8. [License](#license)
+8. [Credits](#credits) 
+9. [License](#license)
  
 
 <a name="about"></a>
@@ -69,13 +68,9 @@ The platform also has authentication features, and users can update their profil
 - Open AI ChatGPT3
 
 
-<a name="usage"></a>
-### Usage
-
-To use the application, head to https://galactus.onrender.com/ and signup. To use it locally follow the next section.
-
 <a name="installation"></a>
-### Installation
+## Usage and Installation
+To use the application, head to https://galactus.onrender.com/ and signup. To use it locally follow the next section.
 
 To install Galactic Social Network on your local computer, you need to:
 
@@ -97,7 +92,7 @@ To install Galactic Social Network on your local computer, you need to:
 
 
 ### In the Webapp
-<a name="webapp"></a>
+<a name="usage"></a>
 
 Welcome to our webapp! Here's a brief overview of what you can expect:
 

@@ -52,7 +52,7 @@ The platform also has authentication features, and users can update their profil
 <img src="https://drive.google.com/uc?export=view&id=1uhXgn3gliAxAx1tiu0J-IN6AsidBB83v" width="100%" height="100%"/> |
 
 
-| Main Chat Mobile View Contacts  | &nbsp;&nbsp;&nbsp; |  Main Chat Mobile View Chat  |
+| Making Bids in Auction View  | &nbsp;&nbsp;&nbsp; |  Winning Bids in Auction View  |
 |:--------:|:-------------:|:--------:|
 |<img src="https://drive.google.com/uc?export=view&id=1X1ANmepXFyc9hFlXqCppKMVN4Uo3nc53" style="margin-right: 10px" width="500" height="100%"/> | &nbsp;&nbsp;&nbsp; | <img src="https://drive.google.com/uc?export=view&id=1AnUtIUpzITkHFKChzmSXZJLyWf0bq6xH" width="500" height="100%"/> |
 

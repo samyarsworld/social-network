@@ -59,7 +59,14 @@ The platform also has authentication features, and users can update their profil
 
 <a name="tech"></a>
 ## Technologies
-
+- Django
+- Python
+- Jinga
+- HTML, CSS, Javascript
+- AWS S3
+- AWS RDS
+- Postgres
+- Open AI ChatGPT3
 
 
 <a name="usage"></a>
@@ -92,22 +99,55 @@ To install Galactic Social Network on your local computer, you need to:
 ### In the Webapp
 <a name="webapp"></a>
 
+Welcome to our webapp! Here's a brief overview of what you can expect:
+
+Getting started:
+- Upon opening the app, you will be prompted to create an account and register your information. Rest assured that your data will be safely stored in our cloud-based database.
+
+The Three Major Apps:
+- Once you've logged in, you will have access to three major apps that are seamlessly interconnected. 
+
+1. The Network App:
+- In this app, you can browse through posts created by real users, as well as create and publish your own posts for others to see.
+- You can use the search function to look for specific posts or ask our AI-powered search tool for assistance.
+- You have the ability to like or dislike posts, follow other users, and add posts to your community.
+- Clicking on each post will give you more details and information.
+
+2. The Email App:
+- With this app, you can easily send and receive messages with your friends who also have accounts within the app.
+- You can archive important messages for future reference.
+
+3. The Auction App:
+- In this app, you can bid on listings posted by other users, or create your own listing to sell.
+- Listings have detailed information and can be added to your watchlist for easy tracking.
+- As a listing holder, you have the power to remove or sell your listing to the highest bidder.
+
+We hope you enjoy using our app and have a great experience connecting with others in our community!
 
 
 <a name="dev"></a>
 ## Developer Features
 
-Galactic Social Network offers a range of features, including:
+Galactic Social Network uses a range of features, including:
 
-- User authentication
-- User profile creation and management
-- Search engine for code snippets
-- AI-powered chatbot to assist with searches
-- Email sending and management
-- Auction app for galactic equipment
-- Listing management for auctions
-- File storage with Amazon S3
-- Data storage with Amazon RDS and PostgreSQL
+- **User authentication:** The app features robust user authentication measures to ensure that only authorized users have access to the app using Django authentication and decorators libraries.
+
+- **User profile creation and management:** Ability to create and manage user profile. This includes adding personal information, profile picture, and managing account settings.
+
+- **Search engine for code snippets:** This is particularly useful for developers and programmers who need quick access to code snippets for their projects. The feature is made available by using django filters.
+
+- **AI-powered chatbot to assist with searches:** In addition to the search engine, an AI-powered chatbot is used to assist with searching. Simply type in query and the chatbot will provide you with relevant results. This is made available by using OpenAI "gpt-3.5-turbo" engine with 0.5 temperature.
+
+- **Email sending and management:** The email module allows sending and managing emails. This is a convenient feature for users who prefer to keep their communication within the app. The whole app uses "one Page Application" method using Javascript to skip loading for a fast user experience.
+
+- **Auction app for galactic equipment:** The auction module allows you to bid on galactic equipment. This is a fun and engaging feature for users who want to participate in auctions and acquire or sell unique items. CRUD methods are used along side a structured relational databased desgined using Django.
+
+- **Listing management for auctions:** Sellers can create and manage their listings for auctions. This includes adding descriptions, images, and setting starting bids. This is made available by using Django models to create an efficient database.
+
+- **File storage with Amazon S3:** The app integrates with Amazon S3 for file storage, ensuring that files are securely stored and easily accessible whenever needed.
+
+- **Data storage with Amazon RDS and PostgreSQL:** The app's data is stored securely with Amazon RDS and PostgreSQL, ensuring that information is safe and protected at all times.
+
 
 <a name="credits"></a>
 ## Credits

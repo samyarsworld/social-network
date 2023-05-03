@@ -90,9 +90,8 @@ To install Galactic Social Network on your local computer, you need to:
 
 8. Navigate to `http://127.0.0.1:8000` in your browser to access the platform.
 
-
-### In the Webapp
 <a name="usage"></a>
+## In the Webapp
 
 Welcome to our webapp! Here's a brief overview of what you can expect:
 

@@ -107,7 +107,7 @@ def ai_generate(request):
             return JsonResponse({'response':response_text})
         except Exception as e:
             print(f"Error occurred: {e}")
-            return JsonResponse({'response':'Something went wrong'})
+            return JsonResponse({'response':'Sorry I exceeded my OpenAI API usage.'})
 
         
     

@@ -20,9 +20,7 @@ def home(request):
 def createListing(request):
     if request.method == 'POST':
         form = CreateListingForm(request.POST , request.FILES)
-
         if form.is_valid():
-
             listing = form.save(commit=False)
             listing.owner = request.user
             price = form.cleaned_data['price'] or 1
@@ -31,7 +29,6 @@ def createListing(request):
             listing.bid_price = bid
 
             if request.FILES['image']:
-                print('3')
                 image_file = request.FILES['image']
                 # Connect to S3
                 s3 = boto3.client('s3')
@@ -41,7 +38,6 @@ def createListing(request):
                 # Get the URL of the uploaded image
                 url = f"https://s3.amazonaws.com/{os.getenv('AWS_STORAGE_BUCKET_NAME')}/{'static/auction_images/' + image_file.name}"
                 listing.image_url = url
-
             listing.save()
 
             return redirect(reverse('auction:home'))

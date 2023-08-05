@@ -1,47 +1,50 @@
-{% extends "authMain/layout.html" %}
-{% load static %}
-{% block body %}
+{% extends "authMain/layout.html" %} {% load static %} {% block body %}
 <style>
-    body {
-        background-color: #cd87cb;
-        color: black;
-    }
+  body {
+    background-color: #cd87cb;
+    color: black;
+  }
 </style>
 
 <h2>{{ category }}s</h2>
 
-<br>
+<br />
 <form action="{% url 'auction:category' %}" method="post">
-    {% csrf_token %}
-    <label for="category">Choose category:</label>
-    <select name="category">
-        <option selected="'selected" value="{{ category }}">
-            {{ category }}
-        </option>
-        {% for c in categories %}
-        <option value="{{ c }}">
-            {{ c }}
-        </option>
-        {% endfor %}
-    </select>
-    <input class="btn btn-warning" type="submit" value="Go">
+  {% csrf_token %}
+  <label for="category">Choose category:</label>
+  <select name="category">
+    <option selected="'selected" value="{{ category }}">{{ category }}</option>
+    {% for c in categories %}
+    <option value="{{ c }}">{{ c }}</option>
+    {% endfor %}
+  </select>
+  <input class="btn btn-warning" type="submit" value="Go" />
 </form>
 
-<br><br>
+<br /><br />
 
 <div class="row mx-3 justify-content-center">
-    {% for listing in listings %}
-    <div class="card mr-2 mb-4" style="width: 18rem;">
-        <img class="card-img-top" src="{% static listing.image_url %}" alt="{{ listing.name }}">
-        <div class="card-body">
-            <h5 class="card-title">{{ listing.name }}</h5>
-            <p class="card-text">{{ listing.description | slice:":100" }}</p>
-            <a href="{% url 'auction:listing' listing.id %}" class="btn btn-primary stretched-link">Details</a>
-        </div>
+  {% for listing in listings %}
+  <div class="card mr-2 mb-4" style="width: 18rem; margin-left: 5px">
+    <img
+      class="card-img-top"
+      style="margin-top: 10px"
+      src="{{listing.image_url}}"
+      alt="{{ listing.name }}"
+    />
+    <div class="card-body">
+      <h5 class="card-title">{{ listing.name }}</h5>
+      <p class="card-text">{{ listing.description | slice:":100" }}</p>
+      <a
+        href="{% url 'auction:listing' listing.id %}"
+        class="btn btn-primary stretched-link"
+        >Details</a
+      >
     </div>
-    {% empty %}
-    <p>No item available.</p>
-    {% endfor %}
+  </div>
+  {% empty %}
+  <p>No item available.</p>
+  {% endfor %}
 </div>
 
 {% endblock %}

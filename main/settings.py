@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import dj_database_url
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -23,13 +24,20 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("SECRET_KEY")
+# Render Postgres config
+DATABASE_URL = os.getenv("DATABASE_URL")
+PG_USER = os.getenv("PG_USER")
+PG_PASSWORD = os.getenv("PG_PASSWORD")
+PG_HOST = os.getenv("PG_HOST")
+
 # AWS RDS config
 # RDS_USER = os.getenv("RDS_USER")
 # RDS_PASSWORD = os.getenv("RDS_PASSWORD")
 # RDS_HOST = os.getenv("RDS_HOST")
 
+
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['galactus.onrender.com', '127.0.0.1']
@@ -86,6 +94,23 @@ WSGI_APPLICATION = 'main.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# Render External DB
+DATABASES = {
+    'default': dj_database_url.parse(DATABASE_URL)
+}
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'network_v4oz',
+#         'USER' : PG_USER,
+#         'PASSWORD': PG_PASSWORD,
+#         'HOST': PG_HOST,
+#         'PORT': '5432',
+#     }
+# }
+
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
@@ -97,12 +122,12 @@ WSGI_APPLICATION = 'main.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

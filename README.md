@@ -1,5 +1,6 @@
 # Galactic Social Network
 ### To use the application, head to https://galactus.onrender.com/ and signup. Welcome to the Galactus Network.
+Note: The first time you go to the website, it takes about a minute to open up. Please hang in there! We're looking to fix the up time issue.
 ## Index
 1. [About](#about)
 2. [Demo](#demo)

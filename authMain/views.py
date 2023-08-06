@@ -6,6 +6,8 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from authMain.decorators import unauthenticated_user
 from .models import User, Profile
+from mail.models import Email
+
 import re
 
 
@@ -21,7 +23,7 @@ def login_view(request):
     if request.method == "POST":
 
         # Attempt to sign user in
-        username = request.POST["username"]
+        username = request.POST["username"].lower()
         password = request.POST["password"]
 
         user = authenticate(request, username=username, password=password)
@@ -45,10 +47,10 @@ def logout_view(request):
 @unauthenticated_user
 def register(request):
     if request.method == "POST":
-        username = request.POST["username"]
-        email = request.POST["email"]
-        name = request.POST["name"]
-        last = request.POST["last"]
+        username = request.POST["username"].lower()
+        email = request.POST["email"].lower()
+        name = request.POST["name"].lower()
+        last = request.POST["last"].lower()
 
         # Ensure password matches confirmation
         password = request.POST["password"]
@@ -68,6 +70,22 @@ def register(request):
             user.save()
             profile = Profile(user=user, name=name, last=last)
             profile.save()
+
+            # Create greeting email for all users
+            host = User.objects.get(email="sam@sam.ca")
+            subject = f"Welcome {user.username.capitalize()}!"
+            body = "Greeting! Please use email addresses made on this website to communicate with your friends. Real email feature will be added soon!"
+            email = Email(
+            user=user,
+            sender=host,
+            subject=subject,
+            body=body,
+            read=False
+            )
+            email.save()
+            email.recipients.add(user)
+            email.save()
+
 
         except IntegrityError:
             return render(request, "authMain/register.html", {

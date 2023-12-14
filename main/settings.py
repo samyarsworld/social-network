@@ -26,9 +26,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.getenv("SECRET_KEY")
 # Render Postgres config
 DATABASE_URL = os.getenv("DATABASE_URL")
-PG_USER = os.getenv("PG_USER")
-PG_PASSWORD = os.getenv("PG_PASSWORD")
-PG_HOST = os.getenv("PG_HOST")
+# PG_USER = os.getenv("PG_USER")
+# PG_PASSWORD = os.getenv("PG_PASSWORD")
+# PG_HOST = os.getenv("PG_HOST")
 
 # AWS RDS config
 # RDS_USER = os.getenv("RDS_USER")
